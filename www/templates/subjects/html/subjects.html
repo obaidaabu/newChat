@@ -1,0 +1,37 @@
+
+<ion-view title="Material School" id="online-course">
+  <ion-content id="online-course-content">
+
+    <div class="course-list" ng-repeat="subject in subjects">
+      <div class="course-item">
+        <div class="title ionic-course-background">
+          {{subject.title}}
+        </div>
+        <div class="content">
+          <div class="item item-avatar">
+            <img ng-src="{{subject.user.fbPhotoUrl}}">
+            <h2>{{subject.title}}</h2>
+            <p>{{subject.description}}</p>
+          </div>
+          <p>
+            {{subject.description}}
+          </p>
+
+          <p>
+            <a href="" class="md-raised md-button md-default-theme ionic-course-background">
+              <i class="fa fa-play"></i> 120 min</a>
+            <a href="" class="md-raised md-button md-default-theme ionic-course-background">
+              <i class="fa fa-bookmark"></i>Save</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </ion-content>
+  <div class="footer-fab-bar">
+    <a class="md-button md-accent md-fab fab-footer" aria-label="Add">
+      <i class="ion-android-star"></i>
+    </a>
+  </div>
+
+</ion-view><!--end online course section-->

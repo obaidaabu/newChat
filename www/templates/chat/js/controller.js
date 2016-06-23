@@ -47,9 +47,9 @@ appControllers.controller('chatCtrl', function ($scope, $firebaseObject, $ionicS
   },300)
 
   //});
-  $scope.sendMessage = function () {
+  $scope.sendMessage = function (msg) {
     $ionicScrollDelegate.scrollBottom();
-
+  debugger
     var isFirstMessage = false;
     if($scope.messages.length == 0){
       isFirstMessage = true;
@@ -98,14 +98,14 @@ appControllers.controller('chatCtrl', function ($scope, $firebaseObject, $ionicS
     var newMessageRef1 = ref1.push();
     newMessageRef1.set(
       {
-        body: $scope.messageContent,
+        body: msg,
         sender: $scope.userDetails._id
       }
     );
     var newMessageRef2 = ref2.push();
     newMessageRef2.set(
       {
-        body: $scope.messageContent,
+        body: msg,
         sender: $scope.userDetails._id
       }
     );
@@ -127,7 +127,7 @@ appControllers.controller('chatCtrl', function ($scope, $firebaseObject, $ionicS
 
         var message = {
           user: createrId,
-          message: $scope.messageContent,
+          message: msg,
           conversationId: otherConversationId,
           userName: $scope.chatDetails.userName,
           subjectName: $scope.chatDetails.subjectName,
@@ -142,7 +142,5 @@ appControllers.controller('chatCtrl', function ($scope, $firebaseObject, $ionicS
     });
 
 
-
-    delete $scope.messageContent;
   }
 })

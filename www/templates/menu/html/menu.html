@@ -19,12 +19,12 @@
         <div class="material-background" id="toggle-menu-left-header">
             <!--menu header section-->
             <div class="menu-left-header">
-                <img class="user-img" src="img/profileAvatar.jpg">
+                <img class="user-img" src="{{userDetails.fbPhotoUrl}}">
 
                 <p>
-                    <span class="title">Ionic Material</span>
+                    <span class="title">{{userDetails.first_name}}    {{userDetails.last_name}}</span>
                     <br/>
-                    <span class="sub-title">Material Design Application</span>
+                    <!--<span class="sub-title">Material Design Application</span>-->
                 </p>
             </div><!--end menu header section-->
         </div> <!--menu content section-->
@@ -34,6 +34,30 @@
             <!--It will disable animation to better performance on android.-->
             <!--list section-->
             <div ng-if="isAndroid" class="menu-list">
+              <div class="row menu-item"  ng-click="navigateTo('app.myProfile')">
+                <div class="col-33">
+                  <i class="fa fa-database"></i>
+                </div>
+                <div class="col-66">
+                  <span>Profile</span>
+                </div>
+              </div>
+              <div class="row menu-item"  ng-click="navigateTo('app.subjects')">
+                <div class="col-33">
+                  <i class="fa fa-database"></i>
+                </div>
+                <div class="col-66">
+                  <span>Subjects</span>
+                </div>
+              </div>
+              <div class="row menu-item"  ng-click="navigateTo('app.messages')">
+                <div class="col-33">
+                  <i class="fa fa-database"></i>
+                </div>
+                <div class="col-66">
+                  <span>Messages</span>
+                </div>
+              </div>
                 <md-subheader class="md-warn">Application Storage</md-subheader>
                 <div class="row menu-item"  ng-click="navigateTo('app.contractlist')">
                     <div class="col-33">

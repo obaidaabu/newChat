@@ -1802,3 +1802,8 @@ md-sidenav {
         color: gray; }
   #map-and-location div.map-input-option div.footer {
     margin-top: 24px; }
+  .deleteMyProfile{
+    right: 15px;
+    position: absolute;
+    top: 20px;
+  }

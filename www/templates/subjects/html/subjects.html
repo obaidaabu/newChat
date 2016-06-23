@@ -3,7 +3,7 @@
   <ion-content id="online-course-content">
 
     <div class="course-list" ng-repeat="subject in subjects">
-      <div class="course-item">
+      <div class="course-item" ng-click="goToChat(subject)">
         <div class="title ionic-course-background">
           {{subject.title}}
         </div>

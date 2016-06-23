@@ -340,6 +340,18 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 }
               }
             })
+            .state('app.chat', {
+              url: "/chat",
+              params:{
+                isAnimated:true
+              },
+              views: {
+                'menuContent': {
+                  templateUrl: "templates/chat/html/chat.html",
+                  controller: "chatCtrl"
+                }
+              }
+            })
             .state('app.profile', {
               url: "/profile",
               params:{

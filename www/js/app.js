@@ -340,6 +340,19 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 }
               }
             })
+          .state('app.addSubject', {
+            url: "/addSubject",
+            params: {
+              noteDetail: null,
+              actionDelete: false
+            },
+            views: {
+              'menuContent': {
+                templateUrl: "templates/subjects/html/add-subject.html",
+                controller: 'addSubjectCtrl'
+              }
+            }
+          })
             .state('app.chat', {
               url: "/chat",
               params:{
@@ -364,6 +377,18 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 }
               }
             })
+          .state('app.myProfile', {
+            url: "/myProfile",
+            params:{
+              isAnimated:true
+            },
+            views: {
+              'menuContent': {
+                templateUrl: "templates/themes/myProfile/html/myProfile.html",
+                controller: "myProfileCtrl"
+              }
+            }
+          })
             .state('app.dashboard', {
                 url: "/dashboard",
                 params:{

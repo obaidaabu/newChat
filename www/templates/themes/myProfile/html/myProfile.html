@@ -1,0 +1,73 @@
+<!--View Information-->
+<!--View name : Expense Dashboard-->
+<!--Controller name : expenseDashboardCtrl-->
+<!--Controller path : www/templates/themes/expense-dashboard/js/controllers.js-->
+<!--State name : app.expense-->
+<!--URL : #app/expense-->
+
+<ion-view title="My Profile" id="expense-dashboard">
+
+  <!--right button on navigation bar-->
+  <ion-nav-buttons side="right">
+    <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
+               aria-label="Setting">
+      <i class="ion-android-more-vertical"></i>
+    </md-button>
+  </ion-nav-buttons> <!--end right button on navigation bar-->
+
+  <!--expense toolbar section-->
+  <md-toolbar class="bar-subheader md-tall md-primary toolbar-expense">
+    <div>
+      <img src="{{userProfile.fbPhotoUrl}}" class="user-img"/>
+
+      <h1>{{userProfile.first_name}} {{userProfile.last_name}}</h1>
+
+      <h2>Think Out Loudly</h2>
+    </div>
+    <a class="md-button md-accent md-fab fab-toolbar-medium" aria-label="Add">
+      <i class="icon ion-plus"></i>
+    </a>
+  </md-toolbar><!--end expense toolbar section-->
+
+  <!--expense content section-->
+  <ion-content id="expense-dashboard-content">
+    <!--Below code it will disable animation to better performance-->
+    <div ng-if="!isAnimated" class="list-expense-menu">
+      <div class="list-expense-menu-item" ng-repeat="subject in subjects"  ng-click="doSomeThing()">
+        <div class="row">
+          <div class="col-10">
+            <i class="fa fa-money"></i>
+          </div>
+          <div class="col-70 menu">
+            <p class="header">{{subject.title}}</p>
+
+            <p class="detail">{{subject.description}}</p>
+          </div>
+          <div class="col-20">
+            <i ng-show="displayDelete"  ng-click="deleteSubject(subject)" class="icon ion-android-cancel muted"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!--Below code it will show animation when selecting row.-->
+    <md-list ng-if="isAnimated">
+      <div ng-repeat="subject in subjects">
+        <md-list-item class="row" ng-click="doSomeThing()">
+          <div class="col-20 icon">
+            <i class="fa fa-inbox"></i>
+          </div>
+          <div class="col80 menu">
+            <p class="header">{{subject.title}}</p>
+
+            <p class="detail">{{subject.description}}</p>
+            <i ng-show="displayDelete"  ng-click="deleteSubject(subject) " class="icon ion-android-cancel muted deleteMyProfile"></i>
+          </div>
+        </md-list-item>
+        <md-divider></md-divider>
+      </div>
+
+    </md-list>
+  </ion-content><!--end expense content section-->
+</ion-view>

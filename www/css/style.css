@@ -344,6 +344,18 @@ md-sidenav {
     font-size: x-large;
     color: white; }
 
+.sub-filter-icon{
+  position: absolute;
+  background-color: #3f51b5 !important;
+  height: 80px;
+  width: 100%;
+  z-index: 22;
+}
+  .sub-icon-filter{
+    margin-top: 49px !important;
+    font-size: x-large !important;
+    right :-5% !important;
+}
 .disabled-link {
   pointer-events: none;
   cursor: default;
@@ -1084,6 +1096,14 @@ md-sidenav {
     #user-interface-content .slide-01 .md-button.md-accent.md-fab i {
       font-size: x-large;
       color: white; }
+.user-photo{
+  width: 68px!important;
+  height: 68px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.sub-title{font-size: 18px !important;}
   #user-interface-content .slide-02 {
     top: 14%; }
     #user-interface-content .slide-02 #default-input-content {
@@ -1293,7 +1313,7 @@ md-sidenav {
       color: white; }
       #pricing-content .price-detail .subscribe-button a.gold-background {
         background-color: #e3cf7a !important; }
-
+.subjects-list{ margin-top: 10%!important;}
 #menu-dashboard-content {
   background-color: #f6f6f6; }
   #menu-dashboard-content .menu-panel {

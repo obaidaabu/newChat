@@ -4310,6 +4310,13 @@ a.subdued {
     height: 43px;
     line-height: 44px; }
 
+.sub-header {
+  top: 44px;
+  height: 44px; }
+.sub-header .title {
+  height: 43px;
+  line-height: 44px; }
+
 .bar-subfooter {
   bottom: 44px;
   height: 44px; }

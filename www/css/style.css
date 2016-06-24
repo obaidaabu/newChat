@@ -1925,3 +1925,22 @@ p.notification{
 #pricing-content.filterContent .col{
   padding-top: 15px !important;
 }
+
+.online-offline{
+  width: 32px;
+  height: 32px !important;
+  left: 6px;
+  font-size: 16px !important;
+  bottom: 10px !important;
+}
+.online-circle{
+  color: #8bc79d !important;
+}
+.offline-circle{
+  color: #C3C3C3 !important;
+
+}
+
+.expandedHeader{
+  height: 80px;
+}

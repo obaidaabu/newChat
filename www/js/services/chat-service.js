@@ -24,6 +24,7 @@ appServices.factory('ChatService', function($ionicScrollDelegate, $firebaseObjec
       return allmessages;
     },
     setMessages: function(conversaion){
+      allmessages = [];
       conversaionId = conversaion;
       createrId = conversaionId.split("-")[0];
       subjectId = conversaionId.split("-")[1];

@@ -5,14 +5,11 @@
     <section class="chats">
 
     <span ng-repeat="message in messages">
-      <span ng-show="!message.notification">
+      <span>
         <div ng-class='getBubbleClass(message.sender)'>
           <p ng-bind="message.body"></p>
         </div>
         <div class="clear"></div>
-      </span>
-      <span >
-        <p class="notification" ng-bind="message.message"></p>
       </span>
     </span>
 

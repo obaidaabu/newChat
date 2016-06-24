@@ -35,7 +35,7 @@ appControllers.controller('loginCtrl', function ($scope, $state,UserService, $ti
       })
     } else {
       var user = {
-        fbToken: 'EAAZAMbMtmoBIBAItnE5bo6ssHB9XbVkZAAbklagpYJhOvNhwUSPyziOCZA2QLckMIRMrE87hs48DcJ6UqZBo2EQSZBuDVZBMcj0ZCalI9w6ZC9cUctKfeK9TJZCWKuaAzk0HgP8q0CkDgona3QaZA8LExobSxZApqoz3CCriL8Qp2lQ5KPRJY7Lwu5lKrykqbINkpAZD',
+        fbToken: 'EAAZAMbMtmoBIBAGcmDiZBc7mjcWxwTVskQyU0TRdGiZATVe3iRWlZAmlP7dOQNoN9iwZArvyFutCFRyUFyQXHUN9auZCvz6h5zZBSeQZB9fqmhoZAKtzbU0dPLZBfjRZByacjIa1cOWEta324b8NWuowayuuycMWarJGeWKhS5f5XdGjTJt5tqKZClm6z6F8gO9n28su1yivdOBCjALPzt4PZChMl',
         notification_token: 'b95a00b4-96e0-41c6-9331-fa787a54291b'
 
       }

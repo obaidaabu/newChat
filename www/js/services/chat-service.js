@@ -70,10 +70,10 @@ appServices.factory('ChatService', function($ionicScrollDelegate, $firebaseObjec
         });
         isFirstMessage = false;
       }
-      otherUrl = new Firebase(otherUrl + "/messages");
-      myUrl = new Firebase(myUrl + "/messages");
-      var newMessageOtherUrl = otherUrl.push();
-      var newMessageRef2 = myUrl.push();
+      otherRef = new Firebase(otherUrl + "/messages");
+      myRef = new Firebase(myUrl + "/messages");
+      var newMessageOtherUrl = otherRef.push();
+      var newMessageRef2 = myRef.push();
       var msgTosend = {
         body: msg,
         sender: userDetails._id

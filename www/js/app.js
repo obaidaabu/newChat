@@ -340,6 +340,18 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 }
               }
             })
+          .state('app.messages', {
+            url: "/messages",
+            params:{
+              isAnimated:true
+            },
+            views: {
+              'menuContent': {
+                templateUrl: "templates/messages/html/messages.html",
+                controller: "messagesCtrl"
+              }
+            }
+          })
           .state('app.addSubject', {
             url: "/addSubject",
             params: {

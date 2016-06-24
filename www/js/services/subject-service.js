@@ -73,7 +73,6 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
       }
         tryPost();
       function tryPost() {
-        debugger
         $http.post(ConfigurationService.ServerUrl() + '/api/subjects/filter?userSubjects=true&userId=' + userId,{}, {
           headers: {
             "access-token": ConfigurationService.UserDetails().token

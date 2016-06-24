@@ -6,87 +6,108 @@
 <!--URL : #app/notedetail-->
 
 <ion-view view-title="">
-    <!--left button on navigation bar-->
-    <ion-nav-buttons side="left">
-        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
-            <i class="ion-android-arrow-back"></i>
+  <!--left button on navigation bar-->
+  <ion-nav-buttons side="left">
+    <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons><!--end left button on navigation bar-->
+
+  <!--note detail section-->
+  <form name="noteForm">
+    <ion-content>
+      <!--toolbar section-->
+      <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium toolbar-in-content">
+        <div>
+          <h1>
+            <i class="ion-android-list"></i>
+          </h1>
+
+          <h3>Loud detail</h3>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           ng-click="showListBottomSheet($event,noteForm)"
+           aria-label="showListBottomSheet">
+          <i class="ion-android-star"></i>
         </a>
-    </ion-nav-buttons><!--end left button on navigation bar-->
-
-    <!--note detail section-->
-    <form name="noteForm">
-        <ion-content>
-            <!--toolbar section-->
-            <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium toolbar-in-content">
-                <div>
-                    <h1>
-                        <i class="ion-android-list"></i>
-                    </h1>
-
-                    <h3>Loud detail</h3>
-                </div>
-                <a class="md-button md-accent md-fab fab-toolbar-medium"
-                   ng-click="showListBottomSheet($event,noteForm)"
-                   aria-label="showListBottomSheet">
-                    <i class="ion-android-star"></i>
-                </a>
-            </md-toolbar><!--end toolbar section-->
-<div id="pricing-content">
-          <div class="row price-header">
-            <div class="col header-name">
-              Near me ?  <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-model="switchData.switchNoInk">
-            </md-switch>
-            </div>
-          </div> <!--end header section-->
-
-          <!--price detail section--
-          >
-          <div class="row price-detail">
-            <div class="col-33 package-name">
-              1&nbsp; Month
-            </div>
-            <div class="col-33 package-subscribe">
-              subscribe
-            </div>
-            <div class="col-33 subscribe-button">
-              <a class="md-raised md-button md-default-theme material-background">
-                $4.99
-              </a>
-            </div>
+      </md-toolbar><!--end toolbar section-->
+      <div id="pricing-content" class="filterContent">
+        <div class="row price-header">
+          <div class="col header-name">
+            Near me ?
           </div>
-          <!--end price detail section-->
-          <hr/>
-</div>
+        </div> <!--end header section-->
+        <!--price detail section-->
+        <div class="row price-detail">
+          <div class="col-100">
+            <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-model="myFilter.nearMe">
+            </md-switch>
+          </div>
+        </div>
+        <!--end price detail section-->
+        <hr/>
+        <div class="row price-header">
+          <div class="col header-name">
+            With who ?
+          </div>
+        </div> <!--end header section-->
+        <!--price detail section-->
+        <div class="row price-detail">
+          <div class="col-100">
+            <md-radio-group ng-model="myFilter.gender">
+              <md-radio-button value="male">Male</md-radio-button>
+              <md-radio-button value="female">Female</md-radio-button>
+              <md-radio-button value="both">Both</md-radio-button>
+            </md-radio-group>
+          </div>
+        </div>
+        <!--end price detail section-->
+        <hr/>
+      <div class="row price-header">
+        <div class="col header-name">
+          Interests ?
+        </div>
+      </div> <!--end header section-->
+      <!--price detail section-->
+      <div class="row price-detail">
+        <div class="col-100">
+          <md-checkbox aria-label="Checkbox" ng-model="myFilter.categories[category._id]" ng-repeat="category in categories">
+          {{category.name}}
+          </md-checkbox>
+        </div>
+      </div>
+      <!--end price detail section-->
+      </div>
+      </div>
+    </ion-content>
+  </form><!--end note detail section-->
 
-        </ion-content>
-    </form><!--end note detail section-->
 
+  <!--angular template section-->
+  <script type="text/ng-template" id="contract-actions-template">
+    <md-bottom-sheet class="md-list md-has-header">
+      <h1 class="md-bottom-sheet-header">Note Actions</h1>
+      <!--list section-->
+      <md-list>
+        <md-list-item>
+          <a class="md-default-theme md-bottom-sheet-list-item"
+             ng-class="{ 'disabled-link': disableSaveBtn}"
+             ng-click="saveNote(note,$event)">
+            <i class="ion-android-list"></i>
+            <span>Save Note</span>
+          </a>
+        </md-list-item>
 
-    <!--angular template section-->
-    <script type="text/ng-template" id="contract-actions-template">
-        <md-bottom-sheet class="md-list md-has-header">
-            <h1 class="md-bottom-sheet-header">Note Actions</h1>
-            <!--list section-->
-            <md-list>
-               <md-list-item>
-                    <a class="md-default-theme md-bottom-sheet-list-item"
-                       ng-class="{ 'disabled-link': disableSaveBtn}"
-                       ng-click="saveNote(note,$event)">
-                        <i class="ion-android-list"></i>
-                        <span>Save Note</span>
-                    </a>
-                </md-list-item>
-
-                <md-list-item ng-show="actionDelete">
-                    <a class="md-default-theme md-bottom-sheet-list-item"
-                       ng-click="deleteNote(note,$event)">
-                        <i class="ion-android-delete"></i>
-                        <span>Remove Note</span>
-                    </a>
-                </md-list-item>
-            </md-list>
-            <!--end list section-->
-        </md-bottom-sheet>
-    </script><!--end angular template section-->
+        <md-list-item ng-show="actionDelete">
+          <a class="md-default-theme md-bottom-sheet-list-item"
+             ng-click="deleteNote(note,$event)">
+            <i class="ion-android-delete"></i>
+            <span>Remove Note</span>
+          </a>
+        </md-list-item>
+      </md-list>
+      <!--end list section-->
+    </md-bottom-sheet>
+  </script><!--end angular template section-->
 
 </ion-view>

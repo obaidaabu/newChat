@@ -258,12 +258,42 @@ appControllers.controller('addSubjectCtrl', function ($scope, SubjectService, No
 
   $scope.initialForm();
 });// End of Notes Detail Page  Controller.
-appControllers.controller('filterCtrl', function ($scope, NoteDB, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {
+appControllers.controller('filterCtrl', function ($scope, NoteDB, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,SubjectService) {
 
+  $scope.saveFilter = function () {
+
+    angular.forEach($scope.myFilter.categories, function (value, key) {
+      if (!value) {
+        delete $scope.myFilter.categories[key];
+      }
+    });
+    window.localStorage["myFilter"] = angular.toJson($scope.myFilter);
+    $scope.closeModal();
+    $window.location.reload(true);
+    //$state.go('app.subjects', {}, {reload: true});
+    //$state.go('app.subjects');
+
+  }
   // initialForm is the first activity in the controller.
   // It will initial all variable data and let the function works when page load.
   $scope.initialForm = function () {
+    SubjectService.GetCategories()
+      .then(function (categories) {
+        $scope.categories = categories;
+      }, function (err) {
+      });
 
+    if (!window.localStorage["myFilter"]) {
+      $scope.myFilter = {
+        nearMe: false,
+        gender: 'both',
+        categories: {}
+      }
+      window.localStorage["myFilter"] = angular.toJson($scope.myFilter);
+    }
+    else {
+      $scope.myFilter = angular.fromJson(window.localStorage["myFilter"]);
+    }
     // $scope.actionDelete is the variable for allow or not allow to delete data.
     // It will allow to delete data when found data in the database.
     // $stateParams.actionDelete(bool) = status that pass from note list page.

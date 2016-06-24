@@ -344,18 +344,6 @@ md-sidenav {
     font-size: x-large;
     color: white; }
 
-.sub-filter-icon{
-  position: absolute;
-  background-color: #3f51b5 !important;
-  height: 80px;
-  width: 100%;
-  z-index: 22;
-}
-  .sub-icon-filter{
-    margin-top: 49px !important;
-    font-size: x-large !important;
-    right :-5% !important;
-}
 .disabled-link {
   pointer-events: none;
   cursor: default;
@@ -1096,14 +1084,6 @@ md-sidenav {
     #user-interface-content .slide-01 .md-button.md-accent.md-fab i {
       font-size: x-large;
       color: white; }
-.user-photo{
-  width: 68px!important;
-  height: 68px !important;
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
-}
-
-.sub-title{font-size: 18px !important;}
   #user-interface-content .slide-02 {
     top: 14%; }
     #user-interface-content .slide-02 #default-input-content {
@@ -1802,102 +1782,20 @@ md-sidenav {
         color: gray; }
   #map-and-location div.map-input-option div.footer {
     margin-top: 24px; }
-  .deleteMyProfile{
-    right: 15px;
-    position: absolute;
-    top: 20px;
-  }
-
-section.chats div {
-  max-width: 255px;
-  word-wrap: break-word;
-  margin-bottom: 20px;
-  line-height: 24px;
+#pricing-content.filterContent {
+  padding-top: 0px;
+  margin-top: -20px;
 }
-section.chats p{
-  margin: 0;
+#pricing-content.filterContent .price-header {
+  padding-bottom: 5px;
 }
-section.chats p.username{
-  max-width: 255px;
-  font-weight: bold;
+#pricing-content.filterContent .row {
+  margin-top: -15px;
 }
-
-p.notification{
-  text-align: center;
-  font-style: italic;
+#pricing-content.filterContent md-switch,md-radio-button,md-checkbox{
+  margin: 4px!important;
+  margin-left: 15px!important;
 }
-
-.clear {
-  clear: both;
-}
-
-.from-me {
-  position: relative;
-  padding: 10px 20px;
-  color: white;
-  background: #0B93F6;
-  border-radius: 25px;
-  float: right;
-}
-.from-me:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  bottom: -2px;
-  right: -7px;
-  height: 20px;
-  border-right: 20px solid #0B93F6;
-  border-bottom-left-radius: 16px 14px;
-  -webkit-transform: translate(0, -2px);
-}
-.from-me:after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  bottom: -2px;
-  right: -56px;
-  width: 26px;
-  height: 20px;
-  background: white;
-  border-bottom-left-radius: 10px;
-  -webkit-transform: translate(-30px, -2px);
-}
-
-.from-them {
-  position: relative;
-  padding: 10px 20px;
-  background: #E5E5EA;
-  border-radius: 25px;
-  color: black;
-  float: left;
-}
-.from-them:before {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  bottom: -2px;
-  left: -7px;
-  height: 20px;
-  border-left: 20px solid #E5E5EA;
-  border-bottom-right-radius: 16px 14px;
-  -webkit-transform: translate(0, -2px);
-}
-.from-them:after {
-  content: "";
-  position: absolute;
-  z-index: 3;
-  bottom: -2px;
-  left: 4px;
-  width: 26px;
-  height: 20px;
-  background: white;
-  border-bottom-right-radius: 10px;
-  -webkit-transform: translate(-30px, -2px);
-}
-
-.username-list {
-  line-height: 38px;
-}
-.expanded{
-  top: 80px !important;
+#pricing-content.filterContent .col{
+  padding-top: 15px !important;
 }

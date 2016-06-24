@@ -1978,3 +1978,16 @@ p.notification{
   color: white !important;
   margin-top: -10px;
 }
+.subject-element{
+  font-size: 12px !important;
+  border-radius: 5px !important;
+  background-color: gainsboro !important;
+  margin: 10px !important;
+  margin-bottom: 15px !important;
+}
+.sub-row{
+  height: 70px !important;
+}
+.subject-title{
+  font-size: 16px !important;
+}

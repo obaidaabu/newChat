@@ -1,4 +1,4 @@
-appControllers.controller('chatCtrl', function ($scope, $firebaseObject, $ionicScrollDelegate, $location, $state, $stateParams, $timeout, $firebaseArray, ConfigurationService, EntityService,NotificationService,ChatService) {
+appControllers.controller('chatCtrl', function ($scope, $state, ConfigurationService, ChatService, UserService, EntityService) {
   $scope.isExpanded = true;
   $scope.chatDetails = EntityService.getMessageDetails();
   $scope.conversationId = $scope.chatDetails.conversationId;
@@ -7,6 +7,7 @@ appControllers.controller('chatCtrl', function ($scope, $firebaseObject, $ionicS
   ChatService.setMessages($scope.conversationId);
 
   $scope.messages = ChatService.getMessages();
+
   $scope.messageIsMine = function(userId){
     return $scope.userDetails._id === userId;
   };
@@ -18,7 +19,16 @@ appControllers.controller('chatCtrl', function ($scope, $firebaseObject, $ionicS
     }
     return classname;
   };
+  $scope.goToUserProfile = function () {
+    var createrId =  $scope.conversationId.split("-")[0];
+    UserService.GetUser(createrId)
+      .then(function (user) {
+        EntityService.setProfile(user);
+        $state.go("app.myProfile",{otherProfile: true});
+      }, function (err) {
+      });
 
+  }
 
   $scope.sendMessage = function (msg) {
     ChatService.sendMessage(msg, $scope.chatDetails);

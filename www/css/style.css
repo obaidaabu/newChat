@@ -1952,7 +1952,7 @@ p.notification{
 }
 
 .headerExpanded .bar.bar-header {
-  height: 80px;
+  height: 80px !important;
 }
 
 .menu .bar.bar-header.expanded {

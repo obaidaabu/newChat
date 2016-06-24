@@ -6,7 +6,6 @@ appControllers.controller('myProfileCtrl', function ($scope,$state,$stateParams,
   $scope.isAnimated =  $stateParams.isAnimated;
   $scope.userProfile = angular.fromJson(window.localStorage['user']);
   $scope.subjects = [];
-  debugger
   $scope.deleteSubject = function (subject) {
     EntityService.deleteFromArray($scope.subjects, subject)
     SubjectService.DeleteSubjects(subject)

@@ -1991,3 +1991,7 @@ p.notification{
 .subject-title{
   font-size: 16px !important;
 }
+.sub-icon-add{
+  left: 10px !important;
+  margin-top: 23px !important;
+}

@@ -88,7 +88,6 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
   };// End initialForm.
 
   $scope.createSubject = function () {
-    debugger
     $scope.subject.categories = [];
     for (var i = 0; i < $scope.categories.length; i++) {
       if ($scope.categories[i].isSelected) {

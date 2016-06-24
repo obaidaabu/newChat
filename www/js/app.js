@@ -352,6 +352,18 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 controller: 'addSubjectCtrl'
               }
             }
+          })   .state('app.filter', {
+            url: "/filter",
+            params: {
+              noteDetail: null,
+              actionDelete: false
+            },
+            views: {
+              'menuContent': {
+                templateUrl: "templates/subjects/html/filter.html",
+                controller: 'filterCtrl'
+              }
+            }
           })
             .state('app.chat', {
               url: "/chat",

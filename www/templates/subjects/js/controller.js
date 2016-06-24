@@ -49,15 +49,21 @@ appControllers.controller('subjectsCtrl', function ($scope, $state,$interval, $s
 
 
 })
-appControllers.controller('addSubjectCtrl', function ($scope, NoteDB, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {
+appControllers.controller('addSubjectCtrl', function ($scope, SubjectService, NoteDB, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {
 
   // initialForm is the first activity in the controller.
   // It will initial all variable data and let the function works when page load.
+  $scope.subject = {};
+  $scope.categories = [];
+
   $scope.initialForm = function () {
 
-    // $scope.actionDelete is the variable for allow or not allow to delete data.
-    // It will allow to delete data when found data in the database.
-    // $stateParams.actionDelete(bool) = status that pass from note list page.
+    SubjectService.GetCategories()
+      .then(function (categories) {
+        $scope.categories = categories;
+      }, function (err) {
+      });
+
     $scope.actionDelete = $stateParams.actionDelete;
 
     // $scope.note is the variable that store note detail data that receive form note list page.
@@ -68,7 +74,20 @@ appControllers.controller('addSubjectCtrl', function ($scope, NoteDB, $statePara
 
     // $scope.noteList is the variable that store data from NoteDB service.
     $scope.noteList = [];
+
   };// End initialForm.
+
+  function createSubject() {
+    $scope.subject.categories = [];
+    for (var i = 0; i < $scope.categories.length; i++) {
+      if ($scope.categories[i].isSelected) {
+        $scope.subject.categories.push($scope.categories[i]._id);
+      }
+    }
+
+    SubjectService.CreateSubject($scope.subject)
+      $scope.subject={};
+  }
 
   //getNoteData is for get note detail data.
   $scope.getNoteData = function (actionDelete, noteDetail) {

@@ -7,19 +7,19 @@
       <i class="fa fa-filter" aria-hidden="true"></i>
     </a>
   </div>
-  <ion-content ng-class="{expanded: isExpanded}" id="menu-dashboard-content">
+  <ion-content ng-class="{expanded: isExpanded}" id="menu-dashboard-content" >
     <ion-refresher
       pulling-text="Pull to refresh..."
       on-refresh="doRefresh()">
     </ion-refresher>
     <div class="menu-dashboard-footer">
-      <md-whiteframe class="md-whiteframe-z1" layout ng-click="goToChat(subject)" ng-repeat="subject in subjects" >
-        <div class="row">
+      <md-whiteframe class="md-whiteframe-z1 subject-element" layout ng-click="goToChat(subject)" ng-repeat="subject in subjects" >
+        <div class="row sub-row">
           <md-list-item class="col-90 sub-list">
           <img ng-src="{{subject.user.fbPhotoUrl}}" class="md-avatar user-photo"/>
 
           <div class="md-list-item-text">
-          <h3 class="sub-title">{{subject.user.first_name}}, {{subject.title}}</h3>
+          <h3 class="sub-title subject-title">{{subject.user.first_name}}, {{subject.title}}</h3>
 
           <p>{{subject.description}}</p>
             <div class="card-footer text-right">

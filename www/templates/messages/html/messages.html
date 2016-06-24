@@ -1,5 +1,6 @@
 <ion-view view-title="Messages">
-  <ion-content class="has-header">
+
+  <ion-content ng-class="{expanded: isExpanded}">
     <div class="content has-header">
       <div class="list">
         <a class="item item-avatar item-icon-right" ng-repeat="message in messages">

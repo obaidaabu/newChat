@@ -1,6 +1,6 @@
-appControllers.controller('messagesCtrl', function ($scope, $state, $stateParams, $timeout, $firebaseArray, ConfigurationService, MessagesService, UserService, EntityService) {
+appControllers.controller('messagesCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $firebaseArray, ConfigurationService, MessagesService, UserService, EntityService) {
   $scope.messages = MessagesService.getMessages();
-
+  $rootScope.isHeaderExpanded = true;
 
   $scope.goToChat = function (message) {
     var messageDetails = {

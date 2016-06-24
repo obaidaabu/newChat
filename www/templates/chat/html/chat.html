@@ -1,12 +1,23 @@
 <ion-view>
-
-  <div class="header-fab-bar sub-filter-icon">
-    <!--left button on navigation bar-->
-
-    <a class="md-button md-accent md-fab sub-icon-filter fab-header" ng-click="goToFilter()" aria-label="Add">
-      <i class="fa fa-filter" aria-hidden="true"></i>
+  <ion-nav-title>
+    <a class="chat-profile-info item item-avatar item-icon-right">
+      <img ng-src="{{chatDetails.fbPhotoUrl}}">
+      <h2>{{chatDetails.userName}}</h2>
+      <p>{{chatDetails.subjectName}}</p>
     </a>
+  </ion-nav-title>
+  <div class="header-fab-bar sub-filter-icon">
+
+
+  </div>
   </div><!--end header fab bar-->
+  <!--left button on navigation bar-->
+  <ion-nav-buttons side="left">
+    <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+      <i class="ion-android-arrow-back"></i>
+    </a>
+  </ion-nav-buttons><!--end left button on navigation bar-->
+
   <ion-content ng-class="{expanded: isExpanded}" id="menu-dashboard-content" class="padding">
 
     <section class="chats">

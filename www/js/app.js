@@ -39,7 +39,7 @@ window.globalVariable = {
 };// End Global variable
 
 
-angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova', 'firebase'])
+angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial','angularMoment', 'ngMessages', 'ngCordova', 'firebase'])
     .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
 
         //Create database table of contracts by using sqlite database.

@@ -78,10 +78,10 @@
 
           <p>{{subject.description}}</p>
             <div class="card-footer text-right">
-              <i class="icon ion-chatbubbles positive"></i> 0
               <div class="pull-left">
-                <!--<span>{{subject.user.create_date}}</span>-->
+                <i class="icon ion-clock"></i> <span am-time-ago="subject.create_date"></span>
               </div>
+              <!--<i class="icon ion-chatbubbles positive"></i>0-->
             </div>
           </div>
           </md-list-item>

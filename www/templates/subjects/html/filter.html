@@ -1,90 +1,83 @@
-<!--View Information-->
-<!--View name : Note Detail-->
-<!--Controller name : noteDetailCtrl-->
-<!--Controller path : www/templates/application-storage/local-application-db/js/controllers.js-->
-<!--State name : app.notedetail-->
-<!--URL : #app/notedetail-->
-
-<ion-view view-title="">
-  <!--left button on navigation bar-->
+<!--&lt;!&ndash;View Information&ndash;&gt;-->
+<!--&lt;!&ndash;View name : Note Detail&ndash;&gt;-->
+<!--&lt;!&ndash;Controller name : noteDetailCtrl&ndash;&gt;-->
+<!--&lt;!&ndash;Controller path : www/templates/application-storage/local-application-db/js/controllers.js&ndash;&gt;-->
+<!--&lt;!&ndash;State name : app.notedetail&ndash;&gt;-->
+<!--&lt;!&ndash;URL : #app/notedetail&ndash;&gt;-->
+<ion-view title="Filter" >
   <ion-nav-buttons side="left">
-    <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
-      <i class="ion-android-arrow-back"></i>
-    </a>
+  <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+  <i class="ion-android-arrow-back"></i>
+  </a>
   </ion-nav-buttons><!--end left button on navigation bar-->
 
-  <!--note detail section-->
+  <!--menu dashboard section-->
+  <!--heaer fab bar-->
+  <div class="header-fab-bar sub-filter-icon ">
+    <a class="md-button md-accent md-fab sub-icon-filter fab-header fab-btn-right" ng-click="saveFilter()" aria-label="Add">
+      <i class="fa ion-android-create" aria-hidden="true"></i>
+    </a>
+  </div><!--end header fab bar-->
+  <!--<ion-content ng-class="{expanded: isExpanded}" id="menu-dashboard-content">-->
+    <!--</ion-content>-->
+  <!--&lt;!&ndash;note detail section&ndash;&gt;-->
   <form name="noteForm">
-    <ion-content>
-      <!--toolbar section-->
-      <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium toolbar-in-content">
-        <div>
-          <h1>
-            <i class="ion-android-list"></i>
-          </h1>
-
-          <h3>Loud detail</h3>
-        </div>
-        <!--<a class="md-button md-accent md-fab fab-toolbar-medium"-->
-           <!--ng-click="showListBottomSheet($event,noteForm)"-->
-           <!--aria-label="showListBottomSheet">-->
-          <!--<i class="ion-android-star"></i>-->
-        <!--</a>-->
-      </md-toolbar><!--end toolbar section-->
-      <div id="pricing-content" class="filterContent">
-        <div class="row price-header">
-          <div class="col header-name">
-            Near me ?
-          </div>
-        </div> <!--end header section-->
-        <!--price detail section-->
-        <div class="row price-detail">
-          <div class="col-100">
-            <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-model="myFilter.nearMe">
-            </md-switch>
-          </div>
-        </div>
-        <!--end price detail section-->
-        <hr/>
-        <div class="row price-header">
-          <div class="col header-name">
-            With who ?
-          </div>
-        </div> <!--end header section-->
-        <!--price detail section-->
-        <div class="row price-detail">
-          <div class="col-100">
-            <md-radio-group ng-model="myFilter.gender">
-              <md-radio-button value="male">Male</md-radio-button>
-              <md-radio-button value="female">Female</md-radio-button>
-              <md-radio-button value="both">Both</md-radio-button>
-            </md-radio-group>
-          </div>
-        </div>
-        <!--end price detail section-->
-        <hr/>
-      <div class="row price-header">
-        <div class="col header-name">
-          Interests ?
-        </div>
-      </div> <!--end header section-->
-      <!--price detail section-->
-      <div class="row price-detail">
-        <div class="col-100">
-          <md-checkbox aria-label="Checkbox" ng-model="myFilter.categories[category._id]" ng-repeat="category in categories">
-          {{category.name}}
-          </md-checkbox>
-        </div>
-      </div>
-      <!--end price detail section-->
-      </div>
-      </div>
-    </ion-content>
-    <!--footer fab bar-->
-    <div class="footer-fab-bar">
-      <a class="md-button md-accent md-fab fab-footer" ng-click="saveFilter()" aria-label="Add">
-        <i class="ion-android-create"></i>
-      </a>
-    </div><!--end footer fab bar-->
+  <ion-content ng-class="{expanded: isExpanded}"class="has-header-filter">
+  <!--toolbar section-->
+  <div id="pricing-content" class="filterContent">
+  <div class="row price-header">
+  <div class="col header-name">
+  Near me ?
+  </div>
+  </div> <!--end header section-->
+  <!--price detail section-->
+  <div class="row price-detail">
+  <div class="col-100">
+  <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-model="myFilter.nearMe">
+  </md-switch>
+  </div>
+  </div>
+  <!--end price detail section-->
+  <hr/>
+  <div class="row price-header">
+  <div class="col header-name">
+  With who ?
+  </div>
+  </div> <!--end header section-->
+  <!--price detail section-->
+  <div class="row price-detail">
+  <div class="col-100">
+  <md-radio-group ng-model="myFilter.gender">
+  <md-radio-button value="male">Male</md-radio-button>
+  <md-radio-button value="female">Female</md-radio-button>
+  <md-radio-button value="both">Both</md-radio-button>
+  </md-radio-group>
+  </div>
+  </div>
+  <!--end price detail section-->
+  <hr/>
+  <div class="row price-header">
+  <div class="col header-name">
+  Interests ?
+  </div>
+  </div> <!--end header section-->
+  <!--price detail section-->
+  <div class="row price-detail">
+  <div class="col-100">
+  <md-checkbox aria-label="Checkbox" ng-model="myFilter.categories[category._id]" ng-repeat="category in categories">
+  {{category.name}}
+  </md-checkbox>
+  </div>
+  </div>
+  <!--end price detail section-->
+  </div>
+  </div>
+  </ion-content>
+  <!--footer fab bar-->
+  <!--<div class="footer-fab-bar">-->
+  <!--<a class="md-button md-accent md-fab fab-footer" ng-click="saveFilter()" aria-label="Add">-->
+  <!--<i class="ion-android-create"></i>-->
+  <!--</a>-->
+  <!--</div>&lt;!&ndash;end footer fab bar&ndash;&gt;-->
   </form><!--end note detail section-->
-</ion-view>
+  </ion-view>

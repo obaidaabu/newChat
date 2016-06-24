@@ -39,7 +39,7 @@ window.globalVariable = {
 };// End Global variable
 
 
-angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova', 'firebase'])
+angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial','angularMoment', 'ngMessages', 'ngCordova', 'firebase'])
     .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
 
         //Create database table of contracts by using sqlite database.
@@ -362,6 +362,18 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
               'menuContent': {
                 templateUrl: "templates/subjects/html/add-subject.html",
                 controller: 'addSubjectCtrl'
+              }
+            }
+          })   .state('app.filter', {
+            url: "/filter",
+            params: {
+              noteDetail: null,
+              actionDelete: false
+            },
+            views: {
+              'menuContent': {
+                templateUrl: "templates/subjects/html/filter.html",
+                controller: 'filterCtrl'
               }
             }
           })

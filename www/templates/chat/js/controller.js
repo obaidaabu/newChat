@@ -1,5 +1,5 @@
 appControllers.controller('chatCtrl', function ($scope, $firebaseObject, $ionicScrollDelegate, $location, $state, $stateParams, $timeout, $firebaseArray, ConfigurationService, EntityService,NotificationService,ChatService) {
-
+  $scope.isExpanded = true;
   $scope.chatDetails = EntityService.getMessageDetails();
   $scope.conversationId = $scope.chatDetails.conversationId;
   $scope.messages = [];

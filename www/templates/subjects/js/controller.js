@@ -1,5 +1,5 @@
 appControllers.controller('subjectsCtrl', function ($scope, $state,$interval, $stateParams, $timeout, SubjectService, EntityService, UserService) {
-
+  $scope.isExpanded = true;
   $scope.subjects = [];
   if (window.cordova && typeof window.plugins.OneSignal != 'undefined' && !window.localStorage['notification_token']) {
     $timeout(function () {

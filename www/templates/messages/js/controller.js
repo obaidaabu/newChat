@@ -1,6 +1,7 @@
 appControllers.controller('messagesCtrl', function ($scope, $state, $stateParams, $timeout, $firebaseArray, ConfigurationService, MessagesService, UserService, EntityService) {
   $scope.messages = MessagesService.getMessages();
 
+
   $scope.goToChat = function (message) {
     var messageDetails = {
       conversationId: message.conversationId,

@@ -47,6 +47,18 @@ appControllers.controller('subjectsCtrl', function ($scope, $rootScope, $state,$
     EntityService.setMessageDetails(messageDetails);
     $state.go('app.chat')
   }
+  $scope.goToUserProfile = function (subject) {
+    //
+    //var userName = subject.user.first_name + " " + subject.user.last_name;
+    //var messageDetails = {
+    //  conversationId: subject.user._id + "-" + subject._id,
+    //  userName: userName,
+    //  subjectName: subject.title,
+    //  fbPhotoUrl: subject.user.fbPhotoUrl
+    //}
+    //EntityService.setMessageDetails(messageDetails);
+    $state.go('app.userProfile',{userId:subject.user._id,first_name:subject.user.first_name})
+  }
 $scope.goToFilter=function(){
   $state.go('app.filter');
   }

@@ -1,5 +1,5 @@
 appControllers.controller('subjectsCtrl', function ($scope, $state,$interval, $stateParams, $timeout, SubjectService, EntityService, UserService) {
-
+  $scope.isExpanded = true;
   $scope.subjects = [];
   if (window.cordova && typeof window.plugins.OneSignal != 'undefined' && !window.localStorage['notification_token']) {
     $timeout(function () {
@@ -46,7 +46,12 @@ appControllers.controller('subjectsCtrl', function ($scope, $state,$interval, $s
     EntityService.setMessageDetails(messageDetails);
     $state.go('app.chat')
   }
-
+$scope.goToFilter=function(){
+  $state.go('app.filter');
+  }
+  $scope.goToAddSubject=function(){
+    $state.go('app.addSubject');
+  }
 
 })
 appControllers.controller('addSubjectCtrl', function ($scope, SubjectService, NoteDB, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {

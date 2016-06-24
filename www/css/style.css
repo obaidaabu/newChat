@@ -1313,7 +1313,7 @@ md-sidenav {
       color: white; }
       #pricing-content .price-detail .subscribe-button a.gold-background {
         background-color: #e3cf7a !important; }
-.subjects-list{ margin-top: 10%!important;}
+
 #menu-dashboard-content {
   background-color: #f6f6f6; }
   #menu-dashboard-content .menu-panel {
@@ -1897,4 +1897,7 @@ p.notification{
 
 .username-list {
   line-height: 38px;
+}
+.expanded{
+  top: 80px !important;
 }

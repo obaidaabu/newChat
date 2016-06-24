@@ -7344,7 +7344,7 @@ ion-slides {
 
 .scroll-refresher {
   position: absolute;
-  top: -60px;
+  top: -20px;
   right: 0;
   left: 0;
   overflow: hidden;

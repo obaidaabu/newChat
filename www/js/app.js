@@ -330,6 +330,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
             })
             .state('app.subjects', {
               url: "/subjects",
+              cache: false,
               params:{
                 isAnimated:true
               },

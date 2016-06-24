@@ -30,23 +30,27 @@
 
             <div id="note-detail-content" class="subject-detail">
                 <!--content section-->
-                <p>
+<!--                <p>
                     <i class="ion-android-calendar"></i> {{note.createDate}}
-                </p>
+                </p>-->
                 <md-input-container md-no-float>
-                    <input required name="noteTitle" placeholder="Subject Title (Required)" ng-model="note.title">
+                    <input required name="noteTitle" placeholder="Subject Title *" ng-model="subject.title">
                 </md-input-container>
-                <textarea rows="7" ng-model="note.detail" maxlength="250"
+                <textarea rows="3" ng-model="subject.description" maxlength="250"
                           placeholder="Describe your subject here ...."></textarea>
                 <span>
                     {{(note.detail.length > 0 ? note.detail.length :0) | json}}/250
                 </span>
-
-              <div class="item item-checkbox" ng-repeat="category in categories">
-                <label class="checkbox">
-                  <input type="checkbox" ng-model="category.isSelected">
-                </label>
-                {{category.name}}
+              <hr/>
+              <div class="row price-header">
+                <div class="col header-name">Categories.. </div>
+              </div>
+              <div class="row price-detail">
+                <div class="col-100">
+                  <md-checkbox aria-label="Checkbox" ng-model="myFilter.categories[category._id]" ng-repeat="category in categories">
+                    {{category.name}}
+                  </md-checkbox>
+                </div>
               </div>
             </div><!--end content section-->
 

@@ -351,6 +351,9 @@ md-sidenav {
   width: 100%;
   z-index: 22;
 }
+.subject-detail{
+  margin-top: -8% !important;
+}
 .sub-icon-filter{
   margin-top: 49px !important;
   font-size: x-large !important;

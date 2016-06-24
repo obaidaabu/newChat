@@ -21,7 +21,7 @@ appControllers.controller('subjectsCtrl', function ($scope, $state,$interval, $s
       }, function (err) {
       });
   }
-  //var stopTime = $interval($scope.doRefresh, 10000);
+  var stopTime = $interval($scope.doRefresh, 10000);
   $scope.$on("$destroy", function() {
     if (stopTime) {
       $interval.cancel(stopTime);
@@ -54,15 +54,19 @@ $scope.goToFilter=function(){
   }
 
 })
-appControllers.controller('addSubjectCtrl', function ($scope, SubjectService, NoteDB, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {
+appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectService, NoteDB, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {
 
   // initialForm is the first activity in the controller.
   // It will initial all variable data and let the function works when page load.
-  $scope.subject = {};
   $scope.categories = [];
 
   $scope.initialForm = function () {
 
+    $scope.subject = {
+      title: '',
+      user: window.localStorage['userId'],
+      description: ''
+    }
     SubjectService.GetCategories()
       .then(function (categories) {
         $scope.categories = categories;
@@ -82,16 +86,19 @@ appControllers.controller('addSubjectCtrl', function ($scope, SubjectService, No
 
   };// End initialForm.
 
-  function createSubject() {
+  $scope.createSubject = function () {
+    debugger
     $scope.subject.categories = [];
     for (var i = 0; i < $scope.categories.length; i++) {
       if ($scope.categories[i].isSelected) {
         $scope.subject.categories.push($scope.categories[i]._id);
       }
     }
-
-    SubjectService.CreateSubject($scope.subject)
-      $scope.subject={};
+      SubjectService.CreateSubject($scope.subject)
+        .then(function () {
+          $state.go("app.subjects");
+        }, function (err) {
+        });
   }
 
   //getNoteData is for get note detail data.

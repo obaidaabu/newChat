@@ -31,21 +31,32 @@
                     <i class="ion-android-star"></i>
                 </a>
             </md-toolbar><!--end toolbar section-->
+<div id="pricing-content">
+          <div class="row price-header">
+            <div class="col header-name">
+              Near me ?  <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-model="switchData.switchNoInk">
+            </md-switch>
+            </div>
+          </div> <!--end header section-->
 
-            <div id="note-detail-content">
-                <!--content section-->
-                <p>
-                    <i class="ion-android-calendar"></i> {{note.createDate}}
-                </p>
-                <md-input-container md-no-float>
-                    <input required name="noteTitle" placeholder="Note Title (Required)" ng-model="note.title">
-                </md-input-container>
-                <textarea rows="7" ng-model="note.detail" maxlength="250"
-                          placeholder="Write something here ...."></textarea>
-                <span>
-                    {{(note.detail.length > 0 ? note.detail.length :0) | json}}/250
-                </span>
-            </div><!--end content section-->
+          <!--price detail section-->
+          <div class="row price-detail">
+            <div class="col-33 package-name">
+              1&nbsp; Month
+            </div>
+            <div class="col-33 package-subscribe">
+              subscribe
+            </div>
+            <div class="col-33 subscribe-button">
+              <a class="md-raised md-button md-default-theme material-background">
+                $4.99
+              </a>
+            </div>
+          </div>
+          <!--end price detail section-->
+          <hr/>
+</div>
+
         </ion-content>
     </form><!--end note detail section-->
 

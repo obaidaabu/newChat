@@ -1941,6 +1941,30 @@ p.notification{
 
 }
 
-.expandedHeader{
+.headerExpanded .bar.bar-header {
   height: 80px;
+}
+
+.menu .bar.bar-header.expanded {
+  transition: all .5s ease-in-out;
+  height: 80px !important;
+}
+.bar .title{
+  height: 78px !important;
+}
+
+.chat-profile-info{
+  background-color: transparent !important;
+  border-color: transparent !important;
+
+}
+.chat-profile-info p, .chat-profile-info h2{
+  color: white !important;
+}
+.chat-profile-info h2{
+  font-weight: bold !important;
+}
+.chat-profile-info p{
+  color: white !important;
+  margin-top: -10px;
 }

@@ -14,8 +14,11 @@ appControllers.controller('myProfileCtrl', function ($scope,$state,$stateParams,
       }, function (err) {
       });
   }
+  $scope.goToAddSubject=function(){
+    $state.go('app.addSubject');
+  }
   $scope.displayDelete = true;
-  SubjectService.GetSubjects(true)
+  SubjectService.GetMySubjects($scope.userProfile._id)
     .then(function (subjects) {
       $scope.subjects = subjects;
     }, function (err) {

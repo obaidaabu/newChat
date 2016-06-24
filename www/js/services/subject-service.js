@@ -66,6 +66,27 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
       }
       return deferred.promise;
     },
+    GetMySubjects: function (userId) {
+      var deferred = $q.defer();
+      if(userId == undefined){
+        userId = null;
+      }
+        tryPost();
+      function tryPost() {
+        debugger
+        $http.post(ConfigurationService.ServerUrl() + '/api/subjects/filter?userSubjects=true&userId=' + userId,{}, {
+          headers: {
+            "access-token": ConfigurationService.UserDetails().token
+          }
+        }).success(function (data) {
+          deferred.resolve(data);
+        }).error(function (msg, code) {
+          deferred.reject(msg);
+          //   $log.error(msg, code);
+        });
+      }
+      return deferred.promise;
+    },
     CreateSubject: function (subject) {
       var deferred = $q.defer();
       var posOptions = {timeout: 10000, enableHighAccuracy: false};

@@ -1,6 +1,13 @@
-<ion-view view-title="Chats">
+<ion-view>
 
-  <ion-content class="padding">
+  <div class="header-fab-bar sub-filter-icon">
+    <!--left button on navigation bar-->
+
+    <a class="md-button md-accent md-fab sub-icon-filter fab-header" ng-click="goToFilter()" aria-label="Add">
+      <i class="fa fa-filter" aria-hidden="true"></i>
+    </a>
+  </div><!--end header fab bar-->
+  <ion-content ng-class="{expanded: isExpanded}" id="menu-dashboard-content" class="padding">
 
     <section class="chats">
 

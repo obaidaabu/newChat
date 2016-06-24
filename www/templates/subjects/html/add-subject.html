@@ -23,30 +23,40 @@
                         <i class="ion-android-list"></i>
                     </h1>
 
-                    <h3>Loud detail</h3>
+                    <h3>Add Subject</h3>
                 </div>
-                <a class="md-button md-accent md-fab fab-toolbar-medium"
-                   ng-click="showListBottomSheet($event,noteForm)"
-                   aria-label="showListBottomSheet">
-                    <i class="ion-android-star"></i>
-                </a>
+
             </md-toolbar><!--end toolbar section-->
 
-            <div id="note-detail-content">
+            <div id="note-detail-content" class="subject-detail">
                 <!--content section-->
                 <p>
                     <i class="ion-android-calendar"></i> {{note.createDate}}
                 </p>
                 <md-input-container md-no-float>
-                    <input required name="noteTitle" placeholder="Note Title (Required)" ng-model="note.title">
+                    <input required name="noteTitle" placeholder="Subject Title (Required)" ng-model="note.title">
                 </md-input-container>
                 <textarea rows="7" ng-model="note.detail" maxlength="250"
-                          placeholder="Write something here ...."></textarea>
+                          placeholder="Describe your subject here ...."></textarea>
                 <span>
                     {{(note.detail.length > 0 ? note.detail.length :0) | json}}/250
                 </span>
+
+              <div class="item item-checkbox" ng-repeat="category in categories">
+                <label class="checkbox">
+                  <input type="checkbox" ng-model="category.isSelected">
+                </label>
+                {{category.name}}
+              </div>
             </div><!--end content section-->
+
         </ion-content>
+      <!--footer fab bar-->
+      <div class="footer-fab-bar">
+        <a class="md-button md-accent md-fab fab-footer" ng-click="createSubject()" aria-label="Add">
+          <i class="ion-plus"></i>
+        </a>
+      </div><!--end footer fab bar-->
     </form><!--end note detail section-->
 
 

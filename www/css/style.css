@@ -1908,3 +1908,20 @@ p.notification{
   color: #9FCCAC !important;
 }
 
+#pricing-content.filterContent {
+  padding-top: 0px;
+  margin-top: -20px;
+}
+#pricing-content.filterContent .price-header {
+  padding-bottom: 5px;
+}
+#pricing-content.filterContent .row {
+  margin-top: -15px;
+}
+#pricing-content.filterContent md-switch,md-radio-button,md-checkbox{
+  margin: 4px!important;
+  margin-left: 15px!important;
+}
+#pricing-content.filterContent .col{
+  padding-top: 15px !important;
+}

@@ -1,27 +1,19 @@
 // Controller of expense dashboard page.
-appControllers.controller('myProfileCtrl', function ($scope,$state,$stateParams,EntityService,SubjectService) {
-
+appControllers.controller('userProfileCtrl', function ($scope,$state,$stateParams,EntityService,SubjectService) {
+$scope.first_name=$state.params.first_name;
   //$scope.isAnimated is the variable that use for receive object data from state params.
   //For enable/disable row animation.
+  $scope.a=function(){
+    debugger
+    $state.go('app.subjects');
+  }
   $scope.isAnimated =  $stateParams.isAnimated;
-  $scope.userProfile = angular.fromJson(window.localStorage['user']);
+  //$scope.userProfile = angular.fromJson(window.localStorage['user']);
   $scope.subjects = [];
-  debugger
-  $scope.deleteSubject = function (subject) {
-    EntityService.deleteFromArray($scope.subjects, subject)
-    SubjectService.DeleteSubjects(subject)
-      .then(function () {
-
-      }, function (err) {
-      });
-  }
-  $scope.goToAddSubject=function(){
-    $state.go('app.addSubject');
-  }
-  $scope.displayDelete = true;
-  SubjectService.GetMySubjects($scope.userProfile._id)
+  SubjectService.GetMySubjects($state.params.userId)
     .then(function (subjects) {
       $scope.subjects = subjects;
+      $scope.userProfile=subjects[0].user;
     }, function (err) {
     });
   // doSomeThing is for do something when user click on a button

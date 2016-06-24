@@ -333,6 +333,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
               cache: false,
               params:{
                 isAnimated:true
+
               },
               views: {
                 'menuContent': {
@@ -405,12 +406,27 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
           .state('app.myProfile', {
             url: "/myProfile",
             params:{
-              isAnimated:true
+              isAnimated:true,
+              userId:''
             },
             views: {
               'menuContent': {
                 templateUrl: "templates/themes/myProfile/html/myProfile.html",
                 controller: "myProfileCtrl"
+              }
+            }
+          })
+          .state('app.userProfile', {
+            url: "/userProfile/:userId/:first_name",
+            params:{
+              isAnimated:true,
+              userId:'',
+              first_name:''
+            },
+            views: {
+              'menuContent': {
+                templateUrl: "templates/themes/userProfile/html/userProfile.html",
+                controller: "userProfileCtrl"
               }
             }
           })

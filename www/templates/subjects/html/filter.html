@@ -80,34 +80,11 @@
       </div>
       </div>
     </ion-content>
+    <!--footer fab bar-->
+    <div class="footer-fab-bar">
+      <a class="md-button md-accent md-fab fab-footer" ng-click="goToAddSubject()" aria-label="Add">
+        <i class="ion-android-create"></i>
+      </a>
+    </div><!--end footer fab bar-->
   </form><!--end note detail section-->
-
-
-  <!--angular template section-->
-  <script type="text/ng-template" id="contract-actions-template">
-    <md-bottom-sheet class="md-list md-has-header">
-      <h1 class="md-bottom-sheet-header">Note Actions</h1>
-      <!--list section-->
-      <md-list>
-        <md-list-item>
-          <a class="md-default-theme md-bottom-sheet-list-item"
-             ng-class="{ 'disabled-link': disableSaveBtn}"
-             ng-click="saveNote(note,$event)">
-            <i class="ion-android-list"></i>
-            <span>Save Note</span>
-          </a>
-        </md-list-item>
-
-        <md-list-item ng-show="actionDelete">
-          <a class="md-default-theme md-bottom-sheet-list-item"
-             ng-click="deleteNote(note,$event)">
-            <i class="ion-android-delete"></i>
-            <span>Remove Note</span>
-          </a>
-        </md-list-item>
-      </md-list>
-      <!--end list section-->
-    </md-bottom-sheet>
-  </script><!--end angular template section-->
-
 </ion-view>

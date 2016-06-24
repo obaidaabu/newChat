@@ -351,6 +351,9 @@ md-sidenav {
   width: 100%;
   z-index: 22;
 }
+.subject-detail{
+  margin-top: -8% !important;
+}
 .sub-icon-filter{
   margin-top: 49px !important;
   font-size: x-large !important;
@@ -1924,6 +1927,13 @@ p.notification{
 }
 #pricing-content.filterContent .col{
   padding-top: 15px !important;
+}
+.fab-btn-right{
+  right: 5% !important;
+  float: right !important;
+}
+.has-header-filter{
+  top: 95px;
 }
 
 .online-offline{

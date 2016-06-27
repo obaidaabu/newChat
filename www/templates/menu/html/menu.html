@@ -58,6 +58,14 @@
                   <span>Messages</span>
                 </div>
               </div>
+              <div class="row menu-item"  ng-click="navigateTo('login')">
+                <div class="col-33">
+                  <i class="fa fa-database"></i>
+                </div>
+                <div class="col-66">
+                  <span>login</span>
+                </div>
+              </div>
                 <md-subheader class="md-warn">Application Storage</md-subheader>
                 <div class="row menu-item"  ng-click="navigateTo('app.contractlist')">
                     <div class="col-33">
@@ -337,6 +345,22 @@
             <!--If device is not Android application will present below code.-->
             <!--It will show animation when selecting row.-->
             <md-list ng-if="!isAndroid">
+              <md-list-item class="menu-list-item" ng-click="navigateTo('app.myProfile')">
+                <i class="fa fa-database"></i>
+                <span>Profile</span>
+              </md-list-item>
+              <md-list-item class="menu-list-item" ng-click="navigateTo('app.subjects')">
+                <i class="fa fa-database"></i>
+                <span>Subjects</span>
+              </md-list-item>
+              <md-list-item class="menu-list-item" ng-click="navigateTo('app.messages')">
+                <i class="fa fa-database"></i>
+                <span>Messages</span>
+              </md-list-item>
+              <md-list-item class="menu-list-item" ng-click="navigateTo('login')">
+                <i class="fa fa-database"></i>
+                <span>login</span>
+              </md-list-item>
                 <md-subheader class="md-warn">Application Storage</md-subheader>
                 <md-list-item class="menu-list-item" ng-click="navigateTo('app.contractlist')">
                     <i class="fa fa-database"></i>

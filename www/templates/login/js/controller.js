@@ -1,5 +1,6 @@
 appControllers.controller('loginCtrl', function ($scope, $state,UserService, $timeout) {
   $scope.fbLogin = function () {
+    console.log("fblogin")
     debugger
     if (window.cordova) {
       UserService.FBlogin().then(function success(s) {
@@ -13,6 +14,7 @@ appControllers.controller('loginCtrl', function ($scope, $state,UserService, $ti
         }
         UserService.CreateUser(user)
           .then(function (user) {
+            console.log("create")
             window.localStorage['user'] = angular.toJson(user);
             var ref = new Firebase("https://chatoi.firebaseio.com");
 
@@ -21,11 +23,14 @@ appControllers.controller('loginCtrl', function ($scope, $state,UserService, $ti
               if (error) {
                 console.log("Login Failed!", error);
               } else {
+                console.log("subjects")
+
                 $state.go("app.subjects");
               }
             });
             $state.go("tab.subjects");
           }, function (err) {
+
           });
         //alert($scope.FbName)
 

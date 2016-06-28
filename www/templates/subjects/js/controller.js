@@ -63,7 +63,7 @@ $scope.goToFilter=function(){
   }
 
 })
-appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectService, NoteDB, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {
+appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectService, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {
   $scope.isExpanded=true;
   // initialForm is the first activity in the controller.
   // It will initial all variable data and let the function works when page load.
@@ -274,7 +274,7 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
 
   $scope.initialForm();
 });// End of Notes Detail Page  Controller.
-appControllers.controller('filterCtrl', function ($scope, NoteDB,$state, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,SubjectService) {
+appControllers.controller('filterCtrl', function ($scope,$state, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,SubjectService) {
 
   $scope.saveFilter = function () {
 

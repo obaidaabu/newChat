@@ -13,7 +13,11 @@ appControllers.controller('chatCtrl', function ($scope, $rootScope, $state, Conf
       $scope.$apply();
     }
   });
-
+  $scope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams, options){
+      conversationUserRef = new Firebase('https://chatoi.firebaseio.com/conversationOnline/' + $scope.userDetails._id);
+      conversationUserRef.remove();
+    })
 
   $scope.messageIsMine = function(userId){
     return $scope.userDetails._id === userId;

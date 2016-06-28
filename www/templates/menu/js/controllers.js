@@ -5,6 +5,16 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
 
     $scope.toggleLeft = buildToggler('left');
   $scope.userDetails = ConfigurationService.UserDetails();
+  var amOnline = new Firebase('https://chatoi.firebaseio.com/.info/connected');
+  var userRef = new Firebase('https://chatoi.firebaseio.com/presence/' + $scope.userDetails._id);
+  var conversationUserRef = new Firebase('https://chatoi.firebaseio.com/conversationOnline/' + $scope.userDetails._id);
+  amOnline.on('value', function(snapshot) {
+    if (snapshot.val()) {
+      userRef.onDisconnect().set('offline');
+      conversationUserRef.onDisconnect().remove();
+      userRef.set('online');
+    }
+  });
     // buildToggler is for create menu toggle.
     // Parameter :
     // navID = id of navigation bar.

@@ -11,7 +11,7 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
   var otherUrl;
   var conversationUserRef;
   var conversationOterUserRef;
-
+  var hanleMyMessageRead;
   var hanleOtherMessageRead;
 
   var scrollBottom = function(){
@@ -34,6 +34,8 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
       conversationOterUserRef = new Firebase('https://chatoi.firebaseio.com/conversationOnline/' + createrId);
 
       hanleOtherMessageRead = new Firebase(otherUrl + "/read");
+      hanleMyMessageRead = new Firebase(myUrl + "/read");
+      hanleMyMessageRead.set(true);
       conversationUserRef.set({
         conversationId: conversaion,
 
@@ -86,7 +88,7 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
       didUserRead.$loaded(function(value){
         if(!value.conversationId){
           hanleOtherMessageRead.set(false);
-        }else if (value.conversationId !== conversaionId){
+        }else if (value.conversationId !== myConversaionId){
           hanleOtherMessageRead.set(false);
         }
         else{

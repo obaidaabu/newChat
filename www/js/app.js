@@ -40,7 +40,7 @@ window.globalVariable = {
 
 
 angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial','angularMoment', 'ngMessages', 'ngCordova', 'firebase'])
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, UserService) {
 
         //Create database table of contracts by using sqlite database.
         //Table schema :
@@ -227,7 +227,14 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
 
         // Add custom style while initial application.
         $rootScope.customStyle = createCustomStyle(window.globalVariable.startPage.state);
+        $ionicPlatform.on('pause', function() {
+          Firebase.goOffline();
 
+        });
+        $ionicPlatform.on('resume', function() {
+          Firebase.goOnline();
+
+        });
         $ionicPlatform.ready(function () {
             ionic.Platform.isFullScreen = true;
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -240,7 +247,31 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
 
             initialSQLite();
             initialRootScope();
-
+          //if (window.localStorage['user']) {
+          //  UserService.CheckUser()
+          //    .then(function (user) {
+          //      if(user.isNeedLogin === false){
+          //
+          //        var user = angular.fromJson(window.localStorage['user']);
+          //        var ref = new Firebase("https://chatoi.firebaseio.com");
+          //
+          //        ref.authWithCustomToken(user.fireToken, function (error, authData) {
+          //
+          //          if (error) {
+          //            console.log("Login Failed!", error);
+          //          } else {
+          //            $state.go("app.subjects");
+          //          }
+          //        });
+          //      }
+          //      else{
+          //        $state.go("login");
+          //      }
+          //    }, function (err) {
+          //    });
+          //}else{
+          //  $state.go("login");
+          //}
             //Checking if view is changing it will go to this function.
             $rootScope.$on('$ionicView.beforeEnter', function () {
                 //hide Action Control for android back button.
@@ -1023,8 +1054,8 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     }
                 }
             });// End $stateProvider
-
+    $urlRouterProvider.otherwise(window.globalVariable.startPage.url);
         //Use $urlRouterProvider.otherwise(Url);
-        $urlRouterProvider.otherwise(window.globalVariable.startPage.url);
+
 
     });

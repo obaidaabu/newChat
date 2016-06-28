@@ -1908,7 +1908,7 @@ p.notification{
   color: #9FCCAC !important;
 }
 .message-unread{
-  color: #9FCCAC !important;
+  color: gray !important;
 }
 
 #pricing-content.filterContent {

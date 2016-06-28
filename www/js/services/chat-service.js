@@ -54,7 +54,7 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
       scrollBottom();
       var myRef, otherRef;
       var isFirstMessage = false;
-      if(allmessages.length == 0){
+      if(!allmessages || allmessages.length == 0){
         isFirstMessage = true;
       }
       if(isFirstMessage){

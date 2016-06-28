@@ -1,5 +1,6 @@
 appControllers.controller('chatCtrl', function ($scope, $rootScope, $state, ConfigurationService, ChatService, UserService, EntityService) {
   $scope.isExpanded = true;
+  $rootScope.isHeaderExpanded = true;
   $scope.chatDetails = EntityService.getMessageDetails();
   $scope.conversationId = $scope.chatDetails.conversationId;
   $scope.messages = [];

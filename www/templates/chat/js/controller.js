@@ -33,12 +33,7 @@ appControllers.controller('chatCtrl', function ($scope, $rootScope, $state, Conf
   };
   $scope.goToUserProfile = function () {
     var createrId =  $scope.conversationId.split("-")[0];
-    UserService.GetUser(createrId)
-      .then(function (user) {
-        EntityService.setProfile(user);
-        $state.go("app.myProfile",{otherProfile: true});
-      }, function (err) {
-      });
+    $state.go('app.userProfile',{userId:createrId })
 
   }
 

@@ -7,6 +7,7 @@ appControllers.controller('messagesCtrl', function ($scope, $rootScope, $state, 
       $scope.$apply();
     }
   });
+  MessagesService.setMessages();
   $scope.goToChat = function (message) {
     var messageDetails = {
       conversationId: message.conversationId,

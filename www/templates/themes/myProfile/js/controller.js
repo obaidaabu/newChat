@@ -1,8 +1,8 @@
 // Controller of expense dashboard page.
-appControllers.controller('myProfileCtrl', function ($scope,$state,$stateParams,EntityService,SubjectService) {
+appControllers.controller('myProfileCtrl', function ($rootScope, $scope,$state,$stateParams,EntityService,SubjectService) {
 
-  //$scope.isAnimated is the variable that use for receive object data from state params.
-  //For enable/disable row animation.
+  $scope.isExpanded = true;
+  $rootScope.isHeaderExpanded = false;
   $scope.isAnimated =  $stateParams.isAnimated;
   $scope.userProfile = angular.fromJson(window.localStorage['user']);
   $scope.subjects = [];

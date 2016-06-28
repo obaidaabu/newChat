@@ -1104,8 +1104,11 @@ md-sidenav {
   height: 68px !important;
   margin-top: 0px !important;
   margin-bottom: 0px !important;
+  margin-left: -16px;
+  border-radius: 34px !important;}
+.subject-desc{
+  margin: 0 0 5px !important;
 }
-
 .sub-title{font-size: 18px !important;}
 #user-interface-content .slide-02 {
   top: 14%; }
@@ -1989,9 +1992,18 @@ p.notification{
   height: 70px !important;
 }
 .subject-title{
-  font-size: 16px !important;
+  font-size: 12px !important;
+  margin-bottom: 5px;
+  margin-top: 6px !important;
+}
+.subject-md-list-item-text{
+  width: 98%;
 }
 .sub-icon-add{
   left: 10px !important;
   margin-top: 23px !important;
 }
+#menu-dashboard-content .menu-dashboard-footer md-whiteframe i{
+  font-size: 14px !important;
+}
+

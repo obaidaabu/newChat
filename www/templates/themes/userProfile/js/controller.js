@@ -3,8 +3,8 @@ appControllers.controller('userProfileCtrl', function ($scope,$state,$stateParam
 $scope.first_name=$state.params.first_name;
   //$scope.isAnimated is the variable that use for receive object data from state params.
   //For enable/disable row animation.
+  debugger
   $scope.a=function(){
-    debugger
     $state.go('app.subjects');
   }
   $scope.isAnimated =  $stateParams.isAnimated;

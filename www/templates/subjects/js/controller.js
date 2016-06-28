@@ -29,10 +29,6 @@ appControllers.controller('subjectsCtrl', function ($scope, $rootScope, $state,$
     }
   });
   $scope.doRefresh();
-  $scope.goToUserProfile = function (user) {
-    EntityService.setProfile(user);
-    $state.go("app.profile",{otherProfile: true});
-  }
 
 
   $scope.goToChat = function (subject) {

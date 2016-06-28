@@ -17,14 +17,11 @@ appControllers.controller('messagesCtrl', function ($scope, $rootScope, $state, 
     EntityService.setMessageDetails(messageDetails);
     $state.go('app.chat', {conversationId: message.conversationId})
   }
+
   $scope.goToUserProfile = function (message) {
     var createrId = message.conversationId.split("-")[0];
-    UserService.GetUser(createrId)
-      .then(function (user) {
-        EntityService.setProfile(user);
-        $state.go("app.profile",{otherProfile: true});
-      }, function (err) {
-      });
+
+    $state.go('app.userProfile',{userId:createrId ,first_name: message.userName})
 
   }
 })

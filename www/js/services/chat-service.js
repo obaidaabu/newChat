@@ -1,4 +1,4 @@
-appServices.factory('ChatService', function($ionicScrollDelegate, $firebaseObject, ConfigurationService){
+appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService){
   var allmessages = [];
   var userDetails = ConfigurationService.UserDetails();
   var userName = userDetails.first_name + " " + userDetails.last_name;
@@ -24,13 +24,12 @@ appServices.factory('ChatService', function($ionicScrollDelegate, $firebaseObjec
       return allmessages;
     },
     setMessages: function(conversaion){
-      allmessages = [];
       conversaionId = conversaion;
       createrId = conversaionId.split("-")[0];
       subjectId = conversaionId.split("-")[1];
       myConversaionId = userDetails._id + '-' + subjectId;
-      myUrl = "https://chatoi.firebaseio.com/chats/" + userDetails._id + "/" + myConversaionId;
-      otherUrl = "https://chatoi.firebaseio.com/chats/" + createrId + "/" + conversaionId;
+      otherUrl = "https://chatoi.firebaseio.com/chats/" + createrId + "/" + myConversaionId;
+      myUrl = "https://chatoi.firebaseio.com/chats/" + userDetails._id  + "/" + conversaionId;
       conversationUserRef = new Firebase('https://chatoi.firebaseio.com/conversationOnline/' + userDetails._id);
       conversationOterUserRef = new Firebase('https://chatoi.firebaseio.com/conversationOnline/' + createrId);
 
@@ -40,9 +39,11 @@ appServices.factory('ChatService', function($ionicScrollDelegate, $firebaseObjec
 
       });
 
-      var firebaseRef = new Firebase('https://chatoi.firebaseio.com/chats/' + userDetails._id + '/' + myConversaionId+ '/messages');
-      firebaseRef.on('child_added', function(dataSnapshot) {
-        allmessages.push(dataSnapshot.val());
+      var firebaseRef = new Firebase('https://chatoi.firebaseio.com/chats/' + userDetails._id + '/' + conversaionId);
+      firebaseRef.on('value', function(dataSnapshot) {
+        //allmessages.push(dataSnapshot.val());
+        allmessages = dataSnapshot.val().messages;
+        $rootScope.$broadcast('sendChatEvent', 'sendChatEvent');
         scrollBottom();
 
       });
@@ -57,12 +58,12 @@ appServices.factory('ChatService', function($ionicScrollDelegate, $firebaseObjec
       if(isFirstMessage){
         otherRef = new Firebase(otherUrl);
         myRef = new Firebase(myUrl);
-        otherRef.set({
+        myRef.set({
           userName: chatDetails.userName,
           subjectName: chatDetails.subjectName,
           fbPhotoUrl: chatDetails.fbPhotoUrl,
         });
-        myRef.set({
+        otherRef.set({
           userName: userName,
           subjectName: chatDetails.subjectName,
           fbPhotoUrl: userDetails.fbPhotoUrl,

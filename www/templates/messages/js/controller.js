@@ -1,7 +1,12 @@
 appControllers.controller('messagesCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $firebaseArray, ConfigurationService, MessagesService, UserService, EntityService) {
-  $scope.messages = MessagesService.getMessages();
-  $rootScope.isHeaderExpanded = true;
 
+  $rootScope.isHeaderExpanded = true;
+  $scope.$on('sendMessagesEvent', function(event, mass) {
+    $scope.messages = MessagesService.getMessages();
+    if(!$scope.$$phase) {
+      $scope.$apply();
+    }
+  });
   $scope.goToChat = function (message) {
     var messageDetails = {
       conversationId: message.conversationId,

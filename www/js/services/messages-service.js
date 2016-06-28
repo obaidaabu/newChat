@@ -1,4 +1,4 @@
-appServices.factory('MessagesService', function($ionicScrollDelegate, $firebaseObject, ConfigurationService) {
+appServices.factory('MessagesService', function($rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService) {
   var messages = [];
   var userDetails = ConfigurationService.UserDetails();
   var ref = new Firebase("https://chatoi.firebaseio.com/chats/" + userDetails._id);
@@ -49,6 +49,7 @@ appServices.factory('MessagesService', function($ionicScrollDelegate, $firebaseO
           var indexx = common.indexOfConv(messages, conversationId);
 
           messages[indexx].online = online
+          $rootScope.$broadcast('sendMessagesEvent', 'sendMessagesEvent');
 
         });
       }

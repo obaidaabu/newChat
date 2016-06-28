@@ -3,15 +3,17 @@ appControllers.controller('loginCtrl', function ($scope, $state,UserService, $ti
     console.log("fblogin")
     debugger
     if (window.cordova) {
+      console.log("cordova")
       UserService.FBlogin().then(function success(s) {
 
 
         window.localStorage['fbData'] = angular.toJson(s.authResponse);
         var fbData = s.authResponse;
-
+        console.log("fbData"+fbData['accessToken'])
         var user = {
           fbToken: fbData['accessToken']
         }
+        console.log("user"+user.toString())
         UserService.CreateUser(user)
           .then(function (user) {
             console.log("create")
@@ -30,7 +32,7 @@ appControllers.controller('loginCtrl', function ($scope, $state,UserService, $ti
             });
             $state.go("tab.subjects");
           }, function (err) {
-
+         console.error(err)
           });
         //alert($scope.FbName)
 
@@ -39,8 +41,9 @@ appControllers.controller('loginCtrl', function ($scope, $state,UserService, $ti
         console.log("Error while performing Facebook login", msg);
       })
     } else {
+      console.log("cordova else")
       var user = {
-        fbToken: 'EAAZAMbMtmoBIBAGcmDiZBc7mjcWxwTVskQyU0TRdGiZATVe3iRWlZAmlP7dOQNoN9iwZArvyFutCFRyUFyQXHUN9auZCvz6h5zZBSeQZB9fqmhoZAKtzbU0dPLZBfjRZByacjIa1cOWEta324b8NWuowayuuycMWarJGeWKhS5f5XdGjTJt5tqKZClm6z6F8gO9n28su1yivdOBCjALPzt4PZChMl',
+        fbToken: 'fbDataEAAZAMbMtmoBIBAFu684rNHbyosdN6bT7aLJahex0tD1WltM5ZBx9XiNJfZCLGsGMJ2xZBV5OqgjQUpSRp2PcLE7h2tG4BFqfJtPl6ZAj5F7PXokzwRT2kzdSZAcSKtA2FnX44ZC2iGaPhK1QUjiW1KPTnYfCzEoWlMiizHnknmQA6gNgnIzwrZCtCThgTZBrZBKwXbxTS9ihueWUz0ITRYZCjbk',
         notification_token: 'b95a00b4-96e0-41c6-9331-fa787a54291b'
 
       }

@@ -237,10 +237,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
     });
     $ionicPlatform.ready(function () {
       ionic.Platform.isFullScreen = true;
-      if (window.cordova && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        cordova.plugins.Keyboard.disableScroll(true);
-      }
+
       if (window.StatusBar) {
         StatusBar.styleDefault();
       }
@@ -1079,6 +1076,6 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
     //  });// End $stateProvider
 
     //Use $urlRouterProvider.otherwise(Url);
-    $urlRouterProvider.otherwise(window.globalVariable.startPage.url);
+
 
   });

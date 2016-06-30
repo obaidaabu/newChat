@@ -97,9 +97,10 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
       })
 
       var userRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
-      userRef.on("value", function (userSnapshot) {
-        if (userSnapshot.val() == 'offline') {
-
+      var isOtherUserOnline = $firebaseObject(userRef);
+      isOtherUserOnline.$loaded(function(value){
+        debugger
+        if(value && value.$value == 'offline'){
           var message = {
             user: createrId,
             message: msg,
@@ -114,7 +115,8 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
             }, function (err) {
             });
         }
-      });
+      })
+
 
 
     }

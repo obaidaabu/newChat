@@ -2006,4 +2006,9 @@ p.notification{
 #menu-dashboard-content .menu-dashboard-footer md-whiteframe i{
   font-size: 14px !important;
 }
-
+.loudly{
+  font-size: 3em !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  font-style: normal !important;
+}

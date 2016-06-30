@@ -40,7 +40,7 @@ window.globalVariable = {
 
 
 angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'angularMoment', 'ngMessages', 'ngCordova', 'firebase'])
-  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet,UserService, EntityService) {
+  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet,UserService, EntityService,$timeout) {
 
     //Create database table of contracts by using sqlite database.
     //Table schema :
@@ -252,7 +252,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
           }
           EntityService.setMessageDetails(messageDetails);
           $timeout(function(){
-            $state.go("app.chat",{conversationId: jsonData.additionalData.conversationId});
+            $state.go("app.chat");
           },500)
 
 

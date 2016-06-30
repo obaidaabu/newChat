@@ -6,6 +6,11 @@
     <a class="md-button md-accent md-fab sub-icon-filter fab-header" ng-click="goToFilter()" aria-label="Add">
       <i class="fa fa-filter" aria-hidden="true"></i>
     </a>
+    <a ui-sref="app.messages" class="msgs-button md-button md-accent md-fab sub-icon-filter fab-header" aria-label="Add">
+      <i  class="fa ion-chatbubbles message-icon" aria-hidden="true"></i>
+      <i ng-if="checkUndreadMessage()" class="icon ion-record circle-new-message" aria-hidden="true"></i>
+    </a>
+
   </div>
   <ion-content ng-class="{expanded: isExpanded}" id="menu-dashboard-content" >
     <ion-refresher

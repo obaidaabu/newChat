@@ -1,4 +1,4 @@
-appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService, NotificationService){
+appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService, NotificationService){
   var allmessages = [];
   var userDetails = ConfigurationService.UserDetails();
   var userName = userDetails.first_name + " " + userDetails.last_name;
@@ -39,6 +39,16 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
       conversationUserRef.set({
         conversationId: conversaion,
 
+      });
+
+      var isUserOnlineRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
+      isUserOnlineRef.on("value", function (userSnapshot) {
+        if (userSnapshot.val() && userSnapshot.val() == 'online') {
+          $rootScope.$broadcast('sendUserOnlineEvent', true);
+        }
+        else{
+          $rootScope.$broadcast('sendUserOnlineEvent', false);
+        }
       });
 
       var firebaseRef = new Firebase('https://chatoi.firebaseio.com/chats/' + userDetails._id + '/' + conversaionId);
@@ -99,7 +109,6 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
       var userRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
       var isOtherUserOnline = $firebaseObject(userRef);
       isOtherUserOnline.$loaded(function(value){
-        debugger
         if(value && value.$value == 'offline'){
           var message = {
             user: createrId,
@@ -119,6 +128,7 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
 
 
 
-    }
+    },
+    scrollBottom: scrollBottom
   }
 })

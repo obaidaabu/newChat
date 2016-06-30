@@ -1,4 +1,4 @@
-appControllers.controller('subjectsCtrl', function ($scope, $ionicPlatform, $rootScope, $state,$interval, $stateParams, $timeout, SubjectService, EntityService, UserService) {
+appControllers.controller('subjectsCtrl', function ($scope, $ionicPlatform, $rootScope, $state,$interval, $stateParams, $timeout, SubjectService, EntityService, UserService, MessagesService) {
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = false;
   $scope.subjects = [];
@@ -17,6 +17,9 @@ appControllers.controller('subjectsCtrl', function ($scope, $ionicPlatform, $roo
     }
   });
 
+  $scope.checkUndreadMessage = function(){
+    return MessagesService.checkUndreadMessage();
+  }
   $scope.doRefresh=function(){
     $scope.$broadcast('scroll.refreshComplete');
     SubjectService.GetSubjects(false)

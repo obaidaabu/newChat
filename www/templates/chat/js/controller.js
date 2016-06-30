@@ -1,15 +1,32 @@
-appControllers.controller('chatCtrl', function ($scope, $rootScope, $state, ConfigurationService, ChatService, UserService, EntityService) {
+appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDelegate, $rootScope, $state, ConfigurationService, ChatService, UserService, EntityService) {
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = true;
   $scope.chatDetails = EntityService.getMessageDetails();
   $scope.conversationId = $scope.chatDetails.conversationId;
   $scope.messages = [];
 
+
   $scope.userDetails = ConfigurationService.UserDetails();
   ChatService.setMessages($scope.conversationId);
   $scope.messages = ChatService.getMessages();
+
+  $timeout(function(){
+    ChatService.scrollBottom();
+  },100)
+
+  $rootScope.$on('sendUserOnlineEvent', function(event, mass) {
+    $scope.isUserOnline = mass;
+
+    if(!$scope.$$phase) {
+      $scope.$apply();
+    }
+  });
+
   $rootScope.$on('sendChatEvent', function(event, mass) {
     $scope.messages = ChatService.getMessages();
+    $timeout(function(){
+      ChatService.scrollBottom();
+    },100)
     if(!$scope.$$phase) {
       $scope.$apply();
     }

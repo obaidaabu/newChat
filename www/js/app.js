@@ -40,7 +40,7 @@ window.globalVariable = {
 
 
 angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'angularMoment', 'ngMessages', 'ngCordova', 'firebase'])
-  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
+  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet,UserService, EntityService) {
 
     //Create database table of contracts by using sqlite database.
     //Table schema :
@@ -237,7 +237,53 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       if (window.StatusBar) {
         StatusBar.styleDefault();
       }
+      if(window.cordova && typeof window.plugins.OneSignal != 'undefined'){
+        var notificationOpenedCallback = function (jsonData) {
 
+          var messageDetails = {
+            conversationId: jsonData.additionalData.conversationId,
+            userName: jsonData.additionalData.userName,
+            subjectName: jsonData.additionalData.subjectName,
+            fbPhotoUrl: jsonData.additionalData.fbPhotoUrl
+          }
+          EntityService.setMessageDetails(messageDetails);
+          $timeout(function(){
+            $state.go("app.chat",{conversationId: jsonData.additionalData.conversationId});
+          },500)
+
+
+        };
+        window.plugins.OneSignal.init("ee6f85c1-a2ff-4d1b-9fa6-29dd4cc306ef",
+          { googleProjectNumber: "238478083352" },
+          notificationOpenedCallback);
+        window.plugins.OneSignal.enableNotificationsWhenActive(false);
+      }
+      //window.localStorage.clear();
+      if (window.localStorage['user']) {
+        UserService.CheckUser()
+          .then(function (user) {
+            if(user.isNeedLogin === false){
+
+              var user = angular.fromJson(window.localStorage['user']);
+              var ref = new Firebase("https://chatoi.firebaseio.com");
+
+              ref.authWithCustomToken(user.fireToken, function (error, authData) {
+
+                if (error) {
+                  console.log("Login Failed!", error);
+                } else {
+                  $state.go("app.subjects");
+                }
+              });
+            }
+            else{
+              $state.go("login");
+            }
+          }, function (err) {
+          });
+      }else{
+        $state.go("login");
+      }
       //initialSQLite();
       initialRootScope();
 

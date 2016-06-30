@@ -1,19 +1,22 @@
-appControllers.controller('subjectsCtrl', function ($scope, $rootScope, $state,$interval, $stateParams, $timeout, SubjectService, EntityService, UserService) {
+appControllers.controller('subjectsCtrl', function ($scope, $ionicPlatform, $rootScope, $state,$interval, $stateParams, $timeout, SubjectService, EntityService, UserService) {
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = false;
   $scope.subjects = [];
-  if (window.cordova && typeof window.plugins.OneSignal != 'undefined' && !window.localStorage['notification_token']) {
-    $timeout(function () {
-      window.plugins.OneSignal.getIds(function (ids) {
+  $ionicPlatform.ready(function () {
+    if (window.cordova && typeof window.plugins.OneSignal != 'undefined' && !window.localStorage['notification_token']) {
+      $timeout(function () {
+        window.plugins.OneSignal.getIds(function (ids) {
 
-        UserService.RegisterNotification(ids.userId)
-          .then(function (userToken) {
-            window.localStorage['notification_token'] = userToken;
-          }, function (err) {
-          });
-      });
-    }, 5000)
-  }
+          UserService.RegisterNotification(ids.userId)
+            .then(function (userToken) {
+              window.localStorage['notification_token'] = userToken;
+            }, function (err) {
+            });
+        });
+      }, 5000)
+    }
+  });
+
   $scope.doRefresh=function(){
     $scope.$broadcast('scroll.refreshComplete');
     SubjectService.GetSubjects(false)

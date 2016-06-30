@@ -1,4 +1,4 @@
-appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService){
+appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService, NotificationService){
   var allmessages = [];
   var userDetails = ConfigurationService.UserDetails();
   var userName = userDetails.first_name + " " + userDetails.last_name;
@@ -108,11 +108,11 @@ appServices.factory('ChatService', function($rootScope, $ionicScrollDelegate, $f
             subjectName: chatDetails.subjectName,
             fbPhotoUrl: chatDetails.fbPhotoUrl
           }
-          //NotificationService.SendMessage(message)
-          //  .then(function (message) {
-          //
-          //  }, function (err) {
-          //  });
+          NotificationService.SendMessage(message)
+            .then(function (message) {
+
+            }, function (err) {
+            });
         }
       });
 

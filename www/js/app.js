@@ -227,7 +227,14 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
 
     // Add custom style while initial application.
     $rootScope.customStyle = createCustomStyle(window.globalVariable.startPage.state);
+    $ionicPlatform.on('pause', function() {
+      Firebase.goOffline();
 
+    });
+    $ionicPlatform.on('resume', function() {
+      Firebase.goOnline();
+
+    });
     $ionicPlatform.ready(function () {
       ionic.Platform.isFullScreen = true;
       if (window.cordova && window.cordova.plugins.Keyboard) {

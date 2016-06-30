@@ -11,7 +11,6 @@ appServices.factory('UserService', function ($http, $log, $q ,$cordovaFacebook, 
             "Content-Type":"application/json"
           }
         }).success(function (data) {
-          alert("2");
           deferred.resolve(data);
         }).error(function (msg, code) {
           deferred.reject(msg);
@@ -51,7 +50,6 @@ appServices.factory('UserService', function ($http, $log, $q ,$cordovaFacebook, 
       var deferred = $q.defer();
       $cordovaFacebook.login(["public_profile", "email", "user_friends","user_birthday"]).then(
         function success(result) {
-          alert("s");
           deferred.resolve(result);
         },
         function error(reason) {

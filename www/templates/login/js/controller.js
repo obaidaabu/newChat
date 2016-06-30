@@ -3,7 +3,6 @@ appControllers.controller('loginCtrl', function ($scope, $state,UserService, $ti
     console.log("fblogin")
     if (window.cordova) {
       UserService.FBlogin().then(function success(s) {
-        alert("1");
 
         window.localStorage['fbData'] = angular.toJson(s.authResponse);
         var fbData = s.authResponse;
@@ -29,7 +28,6 @@ appControllers.controller('loginCtrl', function ($scope, $state,UserService, $ti
             });
             $state.go("tab.subjects");
           }, function (err) {
-            alert("err");
           });
         //alert($scope.FbName)
 

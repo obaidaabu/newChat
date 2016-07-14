@@ -10,6 +10,7 @@
         <ion-nav-bar ng-class="{headerExpanded: $root.isHeaderExpanded}" class="bar-balanced material-background-nav-bar">
             <ion-nav-buttons side="left">
                 <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+              <i  ng-if="checkUndreadMessage()" class="icon ion-record menu-circle-new-message" aria-hidden="true"></i>
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>

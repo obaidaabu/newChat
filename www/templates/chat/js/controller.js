@@ -14,23 +14,8 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     ChatService.scrollBottom();
   },100)
 
-  $rootScope.$on('sendUserOnlineEvent', function(event, mass) {
-    $scope.isUserOnline = mass;
 
-    if(!$scope.$$phase) {
-      $scope.$apply();
-    }
-  });
 
-  $rootScope.$on('sendChatEvent', function(event, mass) {
-    $scope.messages = ChatService.getMessages();
-    $timeout(function(){
-      ChatService.scrollBottom();
-    },100)
-    if(!$scope.$$phase) {
-      $scope.$apply();
-    }
-  });
   $scope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams, options){
       conversationUserRef = new Firebase('https://chatoi.firebaseio.com/conversationOnline/' + $scope.userDetails._id);
@@ -58,4 +43,18 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     ChatService.sendMessage(msg, $scope.chatDetails);
     $scope.data.message = "";
   }
+})
+appControllers.controller('OnlineUserCtrl', function ($scope, EntityService) {
+  var chatDetails = EntityService.getMessageDetails();
+  var conversationId = chatDetails.conversationId;
+  var createrId = conversationId.split("-")[0];
+  var isUserOnlineRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
+  isUserOnlineRef.on("value", function (userSnapshot) {
+    if (userSnapshot.val() && userSnapshot.val() == 'online') {
+      $scope.isUserOnline = true;
+    }
+    else{
+      $scope.isUserOnline = false;
+    }
+  });
 })

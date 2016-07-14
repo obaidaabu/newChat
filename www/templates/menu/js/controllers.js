@@ -1,11 +1,15 @@
 // Controller of menu toggle.
 // Learn more about Sidenav directive of angular material
 // https://material.angularjs.org/latest/#/demo/material.components.sidenav
-appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect,ConfigurationService) {
-$scope.logOut=function(){
-  window.localStorage.clear();
-  $state.go('login');
-}
+appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect,ConfigurationService, MessagesService) {
+    $scope.logOut = function(){
+      window.localStorage.clear();
+      $state.go('login');
+    }
+    $scope.checkUndreadMessage = function(){
+
+      return MessagesService.checkUndreadMessage();
+    }
     $scope.toggleLeft = buildToggler('left');
     $scope.userDetails = ConfigurationService.UserDetails();
     if($scope.userDetails){
@@ -157,3 +161,4 @@ $scope.logOut=function(){
     //End of $ionicPlatform.registerBackButtonAction
 
 }); // End of menu toggle controller.
+

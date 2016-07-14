@@ -25,4 +25,5 @@ appControllers.controller('messagesCtrl', function ($scope, $rootScope, $state, 
     $state.go('app.userProfile',{userId:createrId ,first_name: message.userName})
 
   }
-})
+});
+

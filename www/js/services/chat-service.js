@@ -23,6 +23,19 @@ appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate
     getMessages: function() {
       return allmessages;
     },
+    checkUserOnline: function(conversaion){
+      createrId = conversaionId.split("-")[0];
+      var isUserOnlineRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
+      isUserOnlineRef.on("value", function (userSnapshot) {
+        debugger
+        if (userSnapshot.val() && userSnapshot.val() == 'online') {
+          $rootScope.$broadcast('sendUserOnlineEvent', true);
+        }
+        else{
+          $rootScope.$broadcast('sendUserOnlineEvent', false);
+        }
+      });
+    },
     setMessages: function(conversaion){
       conversaionId = conversaion;
       createrId = conversaionId.split("-")[0];
@@ -41,15 +54,7 @@ appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate
 
       });
 
-      var isUserOnlineRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
-      isUserOnlineRef.on("value", function (userSnapshot) {
-        if (userSnapshot.val() && userSnapshot.val() == 'online') {
-          $rootScope.$broadcast('sendUserOnlineEvent', true);
-        }
-        else{
-          $rootScope.$broadcast('sendUserOnlineEvent', false);
-        }
-      });
+
 
       var firebaseRef = new Firebase('https://chatoi.firebaseio.com/chats/' + userDetails._id + '/' + conversaionId);
       firebaseRef.on('value', function(dataSnapshot) {

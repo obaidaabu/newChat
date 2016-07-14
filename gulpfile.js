@@ -5,13 +5,25 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var uglify = require("gulp-uglify");
 var sh = require('shelljs');
+var $ = require('gulp-load-plugins')({
+  lazy: true
+});
 
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
 //gulp.task('default', ['sass']);
+
+
+// task
+gulp.task('minify-js', function () {
+  gulp.src(['www/js/**/*.js','www/lib/**/*.js','www/templates/**/*.js','www/templates/themes/**/*.js']) // path to your files
+    .pipe(uglify())
+    .pipe(gulp.dest('bulid/'));
+});
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/*.scss')

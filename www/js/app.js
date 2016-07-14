@@ -366,7 +366,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
     $stateProvider
       .state('app', {
         url: "/app",
-        //cache: false,
+        cache: false,
         abstract: true,
         templateUrl: "templates/menu/html/menu.html",
         controller: 'menuCtrl'
@@ -382,7 +382,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       })
       .state('app.subjects', {
         url: "/subjects",
-        //cache: false,
+        cache: false,
         params: {
           isAnimated: false
 

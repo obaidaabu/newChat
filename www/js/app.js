@@ -284,6 +284,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
               $state.go("login");
             }
           }, function (err) {
+            $state.go("login");
           });
       }else{
         $state.go("login");
@@ -365,7 +366,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
     $stateProvider
       .state('app', {
         url: "/app",
-        cache: false,
+        //cache: false,
         abstract: true,
         templateUrl: "templates/menu/html/menu.html",
         controller: 'menuCtrl'
@@ -373,7 +374,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       .state('login', {
         url: "/login",
         params: {
-          isAnimated: true
+          isAnimated: false
         },
         templateUrl: "templates/login/html/login.html",
         controller: "loginCtrl"
@@ -381,9 +382,9 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       })
       .state('app.subjects', {
         url: "/subjects",
-        cache: false,
+        //cache: false,
         params: {
-          isAnimated: true
+          isAnimated: false
 
         },
         views: {
@@ -396,7 +397,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       .state('app.messages', {
         url: "/messages",
         params: {
-          isAnimated: true
+          isAnimated: false
         },
         views: {
           'menuContent': {
@@ -433,7 +434,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       .state('app.chat', {
         url: "/chat",
         params: {
-          isAnimated: true
+          isAnimated: false
         },
         views: {
           'menuContent': {
@@ -457,7 +458,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       .state('app.myProfile', {
         url: "/myProfile",
         params: {
-          isAnimated: true,
+          isAnimated: false,
           userId: ''
         },
         views: {
@@ -470,7 +471,7 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
       .state('app.userProfile', {
         url: "/userProfile/:userId/:first_name",
         params: {
-          isAnimated: true,
+          isAnimated: false,
           userId: '',
           first_name: ''
         },
@@ -481,601 +482,4 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
           }
         }
       })
-    //.state('app.dashboard', {
-    //    url: "/dashboard",
-    //    params:{
-    //        isAnimated:false
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/material-user-interface/dashboard/html/dashboard.html",
-    //            controller: 'dashboardCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.dashboardSetting', {
-    //    url: "/dashboardSetting",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/material-user-interface/dashboard/html/dashboard-setting.html",
-    //            controller: "dashboardSettingCtrl"
-    //        }
-    //    }
-    //})
-    //.state('app.contractlist', {
-    //    url: "/contractlist",
-    //    cache: false,
-    //    params:{
-    //        isAnimated:(ionic.Platform.isAndroid()==false)
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/application-storage/sqLite/html/contract-list.html",
-    //            controller: 'contractListCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.contractdetail', {
-    //    url: "/contractdetail",
-    //    params: {
-    //        contractdetail: null,
-    //        actionDelete: false
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/application-storage/sqLite/html/contract-detail.html",
-    //            controller: 'contractDetailCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.contractsetting', {
-    //    url: "/contractsetting",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/application-storage/sqLite/html/contract-setting.html",
-    //            controller: 'contractSettingCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.notelist', {
-    //    url: "/notelist",
-    //    params:{
-    //        isAnimated:false
-    //    },
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/application-storage/local-application-db/html/note-list.html",
-    //            controller: 'noteListCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.notedetail', {
-    //    url: "/notedetail",
-    //    params: {
-    //        noteDetail: null,
-    //        actionDelete: false
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/application-storage/local-application-db/html/note-detail.html",
-    //            controller: 'noteDetailCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.notesetting', {
-    //    url: "/notesetting",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/application-storage/local-application-db/html/note-setting.html",
-    //            controller: 'noteSettingCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.facebookLogin', {
-    //    url: "/facebookLogin",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/facebook/html/facebook-login.html",
-    //            controller: 'facebookLoginCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.facebookProfile', {
-    //    url: "/facebookProfile",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/facebook/html/facebook-profile.html",
-    //            controller: 'facebookProfileCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.facebookFeed', {
-    //    url: "/facebookFeed",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/facebook/html/facebook-feed.html",
-    //            controller: 'facebookFeedCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.facebookFriendList', {
-    //    url: "/facebookFriendList",
-    //    cache: false,
-    //    params: {
-    //        access_token: null,
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/facebook/html/facebook-friend-list.html",
-    //            controller: 'facebookFriendListCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.googlePlusLogin', {
-    //    url: "/googlePlusLogin",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/google-plus/html/google-login.html",
-    //            controller: 'googlePlusLoginCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.googlePlusProfile', {
-    //    url: "/googlePlusProfile",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/google-plus/html/google-profile.html",
-    //            controller: 'googlePlusProfileCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.googlePlusFeed', {
-    //    url: "/googlePlusFeed",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/google-plus/html/google-feed.html",
-    //            controller: 'googlePlusFeedCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.instagramLogin', {
-    //    url: "/instagramLogin",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/instagram/html/instagram-login.html",
-    //            controller: 'instagramLoginCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.instagramProfile', {
-    //    url: "/instagramProfile",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/instagram/html/instagram-profile.html",
-    //            controller: 'instagramProfileCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.instagramFeed', {
-    //    url: "/instagramFeed",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/instagram/html/instagram-feed.html",
-    //            controller: 'instagramFeedCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.foursquareLogin', {
-    //    url: "/foursquareLogin",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/foursquare/html/foursquare-login.html",
-    //            controller: 'foursquareLoginCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.foursquareProfile', {
-    //    url: "/foursquareProfile",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/foursquare/html/foursquare-profile.html",
-    //            controller: 'foursquareProfileCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.foursquareFeed', {
-    //    url: "/foursquareFeed",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/foursquare/html/foursquare-feed.html",
-    //            controller: 'foursquareFeedCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.dropboxLogin', {
-    //    url: "/dropboxLogin",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/dropbox/html/dropbox-login.html",
-    //            controller: 'dropboxLoginCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.dropboxProfile', {
-    //    url: "/dropboxProfile",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/dropbox/html/dropbox-profile.html",
-    //            controller: 'dropboxProfileCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.dropboxFeed', {
-    //    url: "/dropboxFeed",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/dropbox/html/dropbox-feed.html",
-    //            controller: 'dropboxFeedCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.fakeLogin', {
-    //    url: "/fakeLogin",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/themes/authentication/html/fake-login.html"
-    //        }
-    //    }
-    //})
-    //.state('app.fakeSignUp', {
-    //    url: "/fakeSignUp",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/themes/authentication/html/fake-sign-up.html"
-    //        }
-    //    }
-    //})
-    //.state('app.productList', {
-    //    url: "/productList",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/share-application-content/social-share/html/product-list.html",
-    //            controller: 'productListCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.productDetail', {
-    //    url: "/productDetail",
-    //    params: {
-    //        product: null,
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/share-application-content/social-share/html/product-detail.html",
-    //            controller: 'productDetailCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.productCheckout', {
-    //    url: "/productCheckout",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/share-application-content/social-share/html/product-checkout.html",
-    //            controller: 'productCheckoutCtrl'
-    //        }
-    //    }
-    //})
-    //.state('app.contractUs', {
-    //    url: "/contractUs",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/share-application-content/email-message/html/contract-us.html",
-    //            controller: 'contractUsCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.deviceInformation', {
-    //    url: "/deviceInformation",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/hardware-connect/device-information/html/device-information.html",
-    //            controller: 'deviceInformationCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.mobileContractList', {
-    //    url: "/mobileContractList",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/hardware-connect/mobile-contract/html/mobile-contract-list.html",
-    //            controller: 'mobileContractListCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.mobileContractDetail', {
-    //    url: "/mobileContractDetail",
-    //    params: {
-    //        contractDetail: null,
-    //        actionDelete: false
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/hardware-connect/mobile-contract/html/mobile-contract-detail.html",
-    //            controller: 'mobileContractDetailCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.flashLight', {
-    //    url: "/flashLight",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/hardware-connect/flash-light/html/flash-light.html",
-    //            controller: 'flashLightCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.vibration', {
-    //    url: "/vibration",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/hardware-connect/vibration/html/vibration.html",
-    //            controller: 'vibrationCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.googleAdmob', {
-    //    url: "/googleAdmob",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/advertising-application/googleAdmob/html/googleAdmob.html",
-    //            controller: 'googleAdmobCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.imagePicker', {
-    //    url: "/imagePicker",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/hardware-connect/image-picker/html/image-picker.html",
-    //            controller: 'imagePickerCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //
-    //.state('app.wordpressFeed', {
-    //    url: "/wordpressFeed",
-    //    params: {
-    //        wordpressUrl: null
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/wordpress/html/wordpress-feed.html",
-    //            controller: 'wordpressFeedCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.wordpressLogin', {
-    //    url: "/wordpressLogin",
-    //    cache: false,
-    //    params: {
-    //        isShowError: false
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/wordpress/html/wordpress-login.html",
-    //            controller: 'wordpressLoginCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.wordpressPost', {
-    //    url: "/wordpressPost",
-    //    cache: false,
-    //    params: {
-    //        postDetail: null,
-    //        wordpressUrl: null
-    //    },
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/social-network-connect/wordpress/html/wordpress-post.html",
-    //            controller: 'wordpressPostCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.defaultUI', {
-    //    url: "/defaultUI",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/material-user-interface/default-user-interface/html/default-user-interface.html",
-    //            controller: 'defaultUserInterfaceCtrl'
-    //        }
-    //
-    //    }
-    //})
-    //.state('app.tryApp', {
-    //    url: "/tryApp",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/themes/try-app/html/try-app.html"
-    //        }
-    //    }
-    //})
-    //.state('app.tryAppNoBackBtn', {
-    //    url: "/tryAppNoBackBtn",
-    //    cache: false,
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/themes/try-app/html/try-app-no-back-btn.html"
-    //        }
-    //    }
-    //})
-    //.state('app.pricing', {
-    //    url: "/pricing",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/themes/pricing/html/pricing.html"
-    //        }
-    //    }
-    //})
-    //.state('app.menuDashboard', {
-    //    url: "/menuDashboard",
-    //    views: {
-    //        'menuContent': {
-    //            templateUrl: "templates/themes/menu-dashboard/html/menu-dashboard.html",
-    //            controller: "menuDashboardCtrl"
-    //        }
-    //    }
-    //})
-    //  .state('app.expense', {
-    //  url: "/expense",
-    //  params:{
-    //    isAnimated:true
-    //  },
-    //  views: {
-    //    'menuContent': {
-    //      templateUrl: "templates/themes/expense-dashboard/html/expense-dashboard.html",
-    //      controller: "expenseDashboardCtrl"
-    //    }
-    //  }
-    //})
-    //
-    //  .state('app.expenseSetting', {
-    //      url: "/expenseSetting",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/themes/expense-dashboard/html/expense-dashboard-setting.html",
-    //              controller: "expenseDashboardSettingCtrl"
-    //          }
-    //      }
-    //  })
-    //  .state('app.newsFeed', {
-    //      url: "/newsFeed",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/themes/news-feed/html/news-feed.html"
-    //          }
-    //      }
-    //  })
-    //  .state('app.clothShop', {
-    //      url: "/clothShop",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/themes/cloth-shop/html/cloth-shop.html"
-    //          }
-    //      }
-    //  })
-    //  .state('app.onlineCourse', {
-    //      url: "/onlineCourse",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/themes/online-course/html/online-course.html"
-    //          }
-    //      }
-    //  })
-    //  .state('app.catalog', {
-    //      url: "/catalog",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/themes/catalog/html/catalog.html",
-    //              controller: "catalogCtrl"
-    //          }
-    //      }
-    //  })
-    //  .state('app.locationFeed', {
-    //      url: "/locationFeed",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/themes/location-feed/html/location-feed.html"
-    //          }
-    //      }
-    //  })
-    //  .state('app.cubeFeed', {
-    //      url: "/cubeFeed",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/themes/cube-feed/html/cube-feed.html"
-    //          }
-    //      }
-    //  })
-    //  .state('app.restaurant', {
-    //      url: "/restaurant",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/themes/restaurant/html/restaurant.html"
-    //          }
-    //      }
-    //  })
-    //  .state('app.singlePushNotification', {
-    //      url: "/singlePushNotification",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/push-notification/single-push-notification/html/single-push-notification.html",
-    //              controller: "singlePushNotificationCtrl"
-    //          }
-    //      }
-    //  })
-    //  .state('app.schedulePushNotification', {
-    //      url: "/schedulePushNotification",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/push-notification/schedule-push-notification/html/schedule-push-notification.html",
-    //              controller: "schedulePushNotificationCtrl"
-    //          }
-    //      }
-    //  })
-    //  .state('app.iosMapConnect', {
-    //      url: "/iosMapConnect",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/map-and-location/ios-map-connect/html/ios-map-connect.html",
-    //              controller: "iosMapConnectCtrl"
-    //          }
-    //      }
-    //  })
-    //  .state('app.androidMapConnect', {
-    //      url: "/androidMapConnect",
-    //      views: {
-    //          'menuContent': {
-    //              templateUrl: "templates/map-and-location/android-map-connect/html/android-map-connect.html",
-    //              controller: "androidMapConnectCtrl"
-    //          }
-    //      }
-    //  });// End $stateProvider
-
-    //Use $urlRouterProvider.otherwise(Url);
-
-
   });

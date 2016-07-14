@@ -5,6 +5,7 @@ appServices.factory('MessagesService', function($rootScope, $ionicScrollDelegate
   var fillMessages = function(){
     var ref = new Firebase("https://chatoi.firebaseio.com/chats/" + userDetails._id);
     ref.on("value", function (snapshot) {
+      messages = [];
       angular.forEach(snapshot.val(), function (value, key) {
 
         var conversationId = key;

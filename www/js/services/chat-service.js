@@ -96,6 +96,7 @@ appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate
 
       var didUserRead = $firebaseObject(conversationOterUserRef);
       didUserRead.$loaded(function(value){
+        debugger
         if(!value.conversationId){
           hanleOtherMessageRead.set(false);
         }else if (value.conversationId !== myConversaionId){

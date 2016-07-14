@@ -15,7 +15,15 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
   },100)
 
 
-
+  $rootScope.$on('sendChatEvent', function(event, mass) {
+    $scope.messages = ChatService.getMessages();
+    $timeout(function(){
+      ChatService.scrollBottom();
+    },100)
+    if(!$scope.$$phase) {
+      $scope.$apply();
+    }
+  });
   $scope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams, options){
       conversationUserRef = new Firebase('https://chatoi.firebaseio.com/conversationOnline/' + $scope.userDetails._id);

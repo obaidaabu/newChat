@@ -5,7 +5,7 @@
             <i class="ion-android-arrow-back"></i>
         </a>
     </ion-nav-buttons>
-    <form name="noteForm">
+    <form name="">
         <ion-content>
             <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium toolbar-in-content">
                 <div>
@@ -23,7 +23,7 @@
                 <textarea rows="3" ng-model="subject.description" maxlength="250"
                           placeholder="Describe your subject here ...."></textarea>
                 <span>
-                    {{(note.detail.length > 0 ? note.detail.length :0) | json}}/250
+                    {{(subject.description.length > 0 ? subject.description.length :0) | json}}/250
                 </span>
               <hr/>
               <div class="row price-header">
@@ -40,31 +40,8 @@
         </ion-content>
       <div class="footer-fab-bar">
         <a class="md-button md-accent md-fab fab-footer" ng-click="createSubject()" aria-label="Add">
-          <i class="ion-plus"></i>
+          <i class="ion-plus" ng-click="createSubject()"></i>
         </a>
       </div>
-    </form><
-    <script type="text/ng-template" id="contract-actions-template">
-        <md-bottom-sheet class="md-list md-has-header">
-            <h1 class="md-bottom-sheet-header">Note Actions</h1>
-            <md-list>
-               <md-list-item>
-                    <a class="md-default-theme md-bottom-sheet-list-item"
-                       ng-class="{ 'disabled-link': disableSaveBtn}"
-                       ng-click="saveNote(note,$event)">
-                        <i class="ion-android-list"></i>
-                        <span>Save Note</span>
-                    </a>
-                </md-list-item>
-
-                <md-list-item ng-show="actionDelete">
-                    <a class="md-default-theme md-bottom-sheet-list-item"
-                       ng-click="deleteNote(note,$event)">
-                        <i class="ion-android-delete"></i>
-                        <span>Remove Note</span>
-                    </a>
-                </md-list-item>
-            </md-list>
-        </md-bottom-sheet>
-    </script>
+    </form>
 </ion-view>

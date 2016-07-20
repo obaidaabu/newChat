@@ -25,7 +25,7 @@
       <h2>Think Out Loudly</h2>
     </div>
     <a class="md-button md-accent md-fab fab-toolbar-medium sub-icon-add" aria-label="Add" ng-click="goToAddSubject()">
-      <i class="icon ion-plus"></i>
+      <i class="icon ion-plus" ng-click="goToAddSubject()"></i>
     </a>
   </md-toolbar><!--end expense toolbar section-->
 
@@ -62,7 +62,7 @@
             <p class="header">{{subject.title}}</p>
 
             <p class="detail">{{subject.description}}</p>
-            <i ng-show="displayDelete"  ng-click="deleteSubject(subject) " class="icon ion-android-cancel muted deleteMyProfile"></i>
+            <i  ng-click="deleteSubject(subject) " class="icon ion-android-cancel muted deleteMyProfile"></i>
           </div>
         </md-list-item>
         <md-divider></md-divider>

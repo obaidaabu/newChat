@@ -39,38 +39,8 @@ window.globalVariable = {
 };// End Global variable
 
 
-angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'angularMoment', 'ngMessages', 'ngCordova', 'firebase'])
-  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet,UserService, EntityService,$timeout) {
-
-    //Create database table of contracts by using sqlite database.
-    //Table schema :
-    //Column	   Type	     Primary key
-    //  id	        Integer	    Yes
-    //  firstName	Text	    No
-    //  lastName	Text	    No
-    //  telephone	Text	    No
-    //  email	    Text	    No
-    //  note	    Text	    No
-    //  createDate	DateTime	No
-    //  age	        Integer	    No
-    //  isEnable	Boolean	    No
-
-    //function initialSQLite() {
-    //    db = window.cordova ? $cordovaSQLite.openDB("contract.db") : window.openDatabase("contract.db", "1.0", "IonicMaterialDesignDB", -1);
-    //    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS contracts " +
-    //        "( id           integer primary key   , " +
-    //        "  firstName    text                  , " +
-    //        "  lastName     text                  , " +
-    //        "  telephone    text                  , " +
-    //        "  email        text                  , " +
-    //        "  note         text                  , " +
-    //        "  createDate   dateTime              , " +
-    //        "  age          integer               , " +
-    //        "  isEnable     Boolean)                ");
-    //};
-    // End creating SQLite database table.
-
-    // Create custom defaultStyle.
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngMaterial', 'angularMoment', 'ngMessages', 'ngCordova', 'firebase'])
+  .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet,UserService, EntityService,$timeout,Firebase,ConfigurationService) {
     function getDefaultStyle() {
       return "" +
         ".material-background-nav-bar { " +
@@ -263,12 +233,12 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
         window.plugins.OneSignal.enableNotificationsWhenActive(false);
       }
       //window.localStorage.clear();
-      if (window.localStorage['user']) {
+      var user=ConfigurationService.UserDetails();
+      if (user) {
         UserService.CheckUser()
           .then(function (user) {
             if(user.isNeedLogin === false){
 
-              var user = angular.fromJson(window.localStorage['user']);
               var ref = new Firebase("https://chatoi.firebaseio.com");
 
               ref.authWithCustomToken(user.fireToken, function (error, authData) {
@@ -302,7 +272,6 @@ angular.module('starter', ['ionic', 'ngIOS9UIWebViewPatch', 'starter.controllers
     });
 
   })
-
   .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider, $mdColorPalette, $mdIconProvider) {
 
 

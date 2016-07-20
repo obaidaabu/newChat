@@ -1,15 +1,15 @@
-appControllers.controller('subjectsCtrl', function ($scope, $ionicPlatform, $rootScope, $state,$interval, $stateParams, $timeout, SubjectService, EntityService, UserService, MessagesService) {
+appControllers.controller('subjectsCtrl', function ($scope, $ionicPlatform, $rootScope, $state,$interval, $stateParams, $timeout, SubjectService, EntityService, UserService, MessagesService,ConfigurationService) {
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = false;
   $scope.subjects = [];
   $ionicPlatform.ready(function () {
-    if (window.cordova && typeof window.plugins.OneSignal != 'undefined' && !window.localStorage['notification_token']) {
+    if (window.cordova && typeof window.plugins.OneSignal != 'undefined' && !ConfigurationService.Notification_token()) {
       $timeout(function () {
         window.plugins.OneSignal.getIds(function (ids) {
 
           UserService.RegisterNotification(ids.userId)
             .then(function (userToken) {
-              window.localStorage['notification_token'] = userToken;
+              ConfigurationService.SetNotification_token(userToken);
             }, function (err) {
             });
         });
@@ -64,12 +64,15 @@ appControllers.controller('subjectsCtrl', function ($scope, $ionicPlatform, $roo
 $scope.goToFilter=function(){
   $state.go('app.filter');
   }
+  $scope.goToMessages=function(){
+  $state.go('app.messages');
+  }
   $scope.goToAddSubject=function(){
     $state.go('app.addSubject');
   }
 
 })
-appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectService, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory) {
+appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectService, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,ConfigurationService) {
   $scope.isExpanded=true;
   // initialForm is the first activity in the controller.
   // It will initial all variable data and let the function works when page load.
@@ -80,7 +83,7 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
 
     $scope.subject = {
       title: '',
-      user: window.localStorage['userId'],
+      user: ConfigurationService.UserDetails().userId,
       description: ''
     }
     SubjectService.GetCategories()
@@ -103,7 +106,6 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
   };// End initialForm.
 
   $scope.createSubject = function () {
-    $scope.subject.categories = [];
     for (var i = 0; i < $scope.categories.length; i++) {
       if ($scope.categories[i].isSelected) {
         $scope.subject.categories.push($scope.categories[i]._id);
@@ -280,16 +282,16 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
 
   $scope.initialForm();
 });// End of Notes Detail Page  Controller.
-appControllers.controller('filterCtrl', function ($scope,$state, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,SubjectService) {
+appControllers.controller('filterCtrl', function ($scope,$state, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,SubjectService,ConfigurationService) {
 
   $scope.saveFilter = function () {
-
+debugger
     angular.forEach($scope.myFilter.categories, function (value, key) {
       if (!value) {
         delete $scope.myFilter.categories[key];
       }
     });
-    window.localStorage["myFilter"] = angular.toJson($scope.myFilter);
+    ConfigurationService.SetMyFilter( $scope.myFilter);
     $state.go('app.subjects');
     //$state.go('app.subjects', {}, {reload: true});
     //$state.go('app.subjects');
@@ -304,17 +306,16 @@ appControllers.controller('filterCtrl', function ($scope,$state, $stateParams, $
       }, function (err) {
       });
 
-    if (!window.localStorage["myFilter"]) {
+    $scope.myFilter = ConfigurationService.MyFilter();
+    if (!$scope.myFilter.gender) {
       $scope.myFilter = {
         nearMe: false,
         gender: 'both',
         categories: {}
       }
-      window.localStorage["myFilter"] = angular.toJson($scope.myFilter);
+      ConfigurationService.SetMyFilter($scope.myFilter);
     }
-    else {
-      $scope.myFilter = angular.fromJson(window.localStorage["myFilter"]);
-    }
+
   };// End initialForm.
   $scope.initialForm();
 });// End of Notes Detail Page  Controller.

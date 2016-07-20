@@ -1,57 +1,59 @@
-appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationService,$cordovaGeolocation) {
+appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationService, $cordovaGeolocation) {
   return {
     GetCategories: function () {
       var deferred = $q.defer();
-      $http.get(ConfigurationService.ServerUrl() + '/api/subjects/categories' , {
-        headers: {
-          "access-token": ConfigurationService.UserDetails().token
-        }
-      }).success(function (data) {
-        deferred.resolve(data);
-      }).error(function (msg, code) {
-        deferred.reject(msg);
-        //   $log.error(msg, code);
-      });
-      return deferred.promise;
-    },
-    GetSubjects: function (userSubjects,userId) {
-      var deferred = $q.defer();
-      if(userId == undefined){
-        userId = null;
-      }
-      var myFilter={};
-      if(window.localStorage["myFilter"]) {
-        myFilter=angular.fromJson(window.localStorage["myFilter"]);
+      if (!this.categories) {
+        $http.get(ConfigurationService.ServerUrl() + '/api/subjects/categories', {
+          headers: {
+            "access-token": ConfigurationService.UserDetails().token
+          }
+        }).success(function (data) {
+          deferred.resolve(data);
+        }).error(function (msg, code) {
+          deferred.reject(msg);
+          //   $log.error(msg, code);
+        });
       }
       else {
+        deferred.resolve(this.categories);
+      }
+      return deferred.promise;
+    },
+    GetSubjects: function (userSubjects, userId) {
+      var deferred = $q.defer();
+      if (userId == undefined) {
+        userId = null;
+      }
+      var myFilter = ConfigurationService.MyFilter();
+
+      if (!myFilter.gender) {
         myFilter = {
           nearMe: false,
           gender: 'both',
           categories: {}
         }
-        window.localStorage["myFilter"]=angular.toJson(myFilter);
+        ConfigurationService.SetMyFilter(myFilter);
       }
-      if(myFilter.nearMe) {
+      if (myFilter.nearMe) {
         var posOptions = {timeout: 10000, enableHighAccuracy: false};
         $cordovaGeolocation
           .getCurrentPosition(posOptions)
           .then(function (position) {
             var lat = position.coords.latitude;
             var long = position.coords.longitude;
-            myFilter.locationCoords=[lat,long];
+            myFilter.locationCoords = [lat, long];
             tryPost();
           }, function (err) {
-            myFilter.locationCoords=[];
+            myFilter.locationCoords = [];
             tryPost();
             // error
           });
       }
-      else
-      {
-        myFilter.locationCoords=[];
+      else {
+        myFilter.locationCoords = [];
         tryPost();
       }
-      myFilter.categories= Object.keys(myFilter.categories);
+      myFilter.categories = Object.keys(myFilter.categories);
       function tryPost() {
         $http.post(ConfigurationService.ServerUrl() + '/api/subjects/filter?userSubjects=' + userSubjects + '&userId=' + userId, myFilter, {
           headers: {
@@ -64,16 +66,17 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
           //   $log.error(msg, code);
         });
       }
+
       return deferred.promise;
     },
     GetMySubjects: function (userId) {
       var deferred = $q.defer();
-      if(userId == undefined){
+      if (userId == undefined) {
         userId = null;
       }
-        tryPost();
+      tryPost();
       function tryPost() {
-        $http.post(ConfigurationService.ServerUrl() + '/api/subjects/filter?userSubjects=true&userId=' + userId,{}, {
+        $http.post(ConfigurationService.ServerUrl() + '/api/subjects/filter?userSubjects=true&userId=' + userId, {}, {
           headers: {
             "access-token": ConfigurationService.UserDetails().token
           }
@@ -84,6 +87,7 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
           //   $log.error(msg, code);
         });
       }
+
       return deferred.promise;
     },
     CreateSubject: function (subject) {
@@ -94,10 +98,10 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
         .then(function (position) {
           var lat = position.coords.latitude;
           var long = position.coords.longitude;
-          subject.locationCoords=[lat,long];
+          subject.locationCoords = [lat, long];
           tryPost();
         }, function (err) {
-          subject.locationCoords=[];
+          subject.locationCoords = [];
           tryPost();
           // error
         });
@@ -110,17 +114,18 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
               "access-token": ConfigurationService.UserDetails().token
             }
           }).success(function (data) {
-            deferred.resolve(data);
-          }).error(function (msg, code) {
-            deferred.reject(msg);
-            //   $log.error(msg, code);
-          });
+          deferred.resolve(data);
+        }).error(function (msg, code) {
+          deferred.reject(msg);
+          //   $log.error(msg, code);
+        });
       }
+
       return deferred.promise;
     },
     DeleteSubjects: function (subject) {
       var deferred = $q.defer();
-      $http.delete(ConfigurationService.ServerUrl() + '/api/subjects?_id='+ subject._id, {
+      $http.delete(ConfigurationService.ServerUrl() + '/api/subjects?_id=' + subject._id, {
         headers: {
           "access-token": ConfigurationService.UserDetails().token
         }

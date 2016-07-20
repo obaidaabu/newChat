@@ -1,10 +1,10 @@
 // Controller of expense dashboard page.
-appControllers.controller('myProfileCtrl', function ($rootScope, $scope,$state,$stateParams,EntityService,SubjectService) {
+appControllers.controller('myProfileCtrl', function ($rootScope, $scope,$state,$stateParams,EntityService,SubjectService,ConfigurationService) {
 
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = false;
   $scope.isAnimated =  $stateParams.isAnimated;
-  $scope.userProfile = angular.fromJson(window.localStorage['user']);
+  $scope.userProfile = ConfigurationService.UserDetails();// angular.fromJson(window.localStorage['user']);
   $scope.subjects = [];
   $scope.deleteSubject = function (subject) {
     EntityService.deleteFromArray($scope.subjects, subject)

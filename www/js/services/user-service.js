@@ -71,10 +71,8 @@ appServices.factory('UserService', function ($http, $log, $q ,$cordovaFacebook, 
           }
         }
       ).success(function (data) {
-          alert("11")
           deferred.resolve(data);
         }).error(function (msg, code) {
-          alert("3")
           deferred.reject(msg);
           //   $log.error(msg, code);
         });

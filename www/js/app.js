@@ -211,6 +211,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       if (window.StatusBar) {
         StatusBar.styleDefault();
       }
+      //var messageDetails = {
+      //  conversationId: "575f27a54c5c031100d2d9ff-578fc2e1dc2c8b1100078962",
+      //  userName: "Yohana Khoury",
+      //  subjectName: "ggg",
+      //  fbPhotoUrl:"https://scontent.xx.fbcdn.net/v/t1.0-1/p480x480/10514725_10152127260155566_3423545955096845695_n.jpg?oh=cfdb018d3812e7ad3b1f80c36971a82e&oe=57EE3104"
+      //}
+      //EntityService.setMessageDetails(messageDetails);
+      //$timeout(function(){
+      //  $state.go("app.chat");
+      //},3000)
+
       if(window.cordova && typeof window.plugins.OneSignal != 'undefined'){
         var notificationOpenedCallback = function (jsonData) {
 
@@ -223,7 +234,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           EntityService.setMessageDetails(messageDetails);
           $timeout(function(){
             $state.go("app.chat");
-          },500)
+          },3000)
 
 
         };

@@ -17,7 +17,7 @@ appServices.factory('ConfigurationService', function () {
     Notification_token: function () {
       if (!this.notification_token) {
         if (window.localStorage['notification_token']) {
-          this.notification_token = angular.fromJson(window.localStorage['notification_token'])
+          this.notification_token = window.localStorage['notification_token']
         }
       }
       return this.notification_token;
@@ -28,7 +28,7 @@ appServices.factory('ConfigurationService', function () {
           this.myFilter = angular.fromJson(window.localStorage['myFilter'])
         }
       }
-      var temp={};
+      var temp= {};
       angular.copy(this.myFilter,temp);
       return temp ;
     },

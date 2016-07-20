@@ -74,12 +74,12 @@ appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate
           userName: chatDetails.userName,
           subjectName: chatDetails.subjectName,
           fbPhotoUrl: chatDetails.fbPhotoUrl,
+          read: true
         });
         otherRef.set({
           userName: userName,
           subjectName: chatDetails.subjectName,
-          fbPhotoUrl: userDetails.fbPhotoUrl,
-          read: true
+          fbPhotoUrl: userDetails.fbPhotoUrl
         });
         isFirstMessage = false;
       }
@@ -96,7 +96,6 @@ appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate
 
       var didUserRead = $firebaseObject(conversationOterUserRef);
       didUserRead.$loaded(function(value){
-        debugger
         if(!value.conversationId){
           hanleOtherMessageRead.set(false);
         }else if (value.conversationId !== myConversaionId){
@@ -114,10 +113,10 @@ appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate
           var message = {
             user: createrId,
             message: msg,
-            conversationId: conversaionId,
-            userName: chatDetails.userName,
+            conversationId: myConversaionId,
+            userName: userName,
             subjectName: chatDetails.subjectName,
-            fbPhotoUrl: chatDetails.fbPhotoUrl
+            fbPhotoUrl: userDetails.fbPhotoUrl
           }
           NotificationService.SendMessage(message)
             .then(function (message) {

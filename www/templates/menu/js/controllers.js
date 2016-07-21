@@ -4,6 +4,7 @@
 appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect,ConfigurationService, MessagesService) {
     $scope.logOut = function(){
       window.localStorage.clear();
+      ConfigurationService.LogOut();
       $state.go('login');
     }
     $scope.checkUndreadMessage = function(){

@@ -376,6 +376,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
       .state('app.messages', {
         url: "/messages",
+        cache: false,
         params: {
           isAnimated: false
         },
@@ -388,6 +389,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
       .state('app.addSubject', {
         url: "/addSubject",
+        cache: false,
         params: {
           noteDetail: null,
           actionDelete: false
@@ -400,6 +402,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }).state('app.filter', {
         url: "/filter",
+      cache: false,
         params: {
           noteDetail: null,
           actionDelete: false
@@ -413,6 +416,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
       .state('app.chat', {
         url: "/chat",
+        cache: false,
         params: {
           isAnimated: false
         },
@@ -437,6 +441,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       //})
       .state('app.myProfile', {
         url: "/myProfile",
+        cache: false,
         params: {
           isAnimated: false,
           userId: ''
@@ -450,6 +455,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       })
       .state('app.userProfile', {
         url: "/userProfile/:userId/:first_name",
+        cache: false,
         params: {
           isAnimated: false,
           userId: '',

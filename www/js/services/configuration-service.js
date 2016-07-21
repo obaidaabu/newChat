@@ -43,6 +43,11 @@ appServices.factory('ConfigurationService', function () {
         window.localStorage['notification_token'] = angular.toJson(notification_token);
         this.notification_token = notification_token;
       }
+    },
+    LogOut:function () {
+      delete this.notification_token;
+      delete this.myFilter;
+      delete this.userDetails;
     }
   }
 });

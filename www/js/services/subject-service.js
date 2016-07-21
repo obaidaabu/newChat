@@ -2,7 +2,6 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
   return {
     GetCategories: function () {
       var deferred = $q.defer();
-      if (!this.categories) {
         $http.get(ConfigurationService.ServerUrl() + '/api/subjects/categories', {
           headers: {
             "access-token": ConfigurationService.UserDetails().token
@@ -13,10 +12,6 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
           deferred.reject(msg);
           //   $log.error(msg, code);
         });
-      }
-      else {
-        deferred.resolve(this.categories);
-      }
       return deferred.promise;
     },
     GetSubjects: function (userSubjects, userId) {
@@ -30,7 +25,7 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
         myFilter = {
           nearMe: false,
           gender: 'both',
-          categories: {}
+          categories: []
         }
         ConfigurationService.SetMyFilter(myFilter);
       }
@@ -53,7 +48,7 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
         myFilter.locationCoords = [];
         tryPost();
       }
-      myFilter.categories = Object.keys(myFilter.categories);
+      // myFilter.categories = Object.keys(myFilter.categories);
       function tryPost() {
         $http.post(ConfigurationService.ServerUrl() + '/api/subjects/filter?userSubjects=' + userSubjects + '&userId=' + userId, myFilter, {
           headers: {

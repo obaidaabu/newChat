@@ -83,8 +83,9 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
 
     $scope.subject = {
       title: '',
-      user: ConfigurationService.UserDetails().userId,
-      description: ''
+      user: ConfigurationService.UserDetails()._id,
+      description: '',
+      categories:[]
     }
     SubjectService.GetCategories()
       .then(function (categories) {
@@ -106,8 +107,9 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
   };// End initialForm.
 
   $scope.createSubject = function () {
+    $scope.subject.categories=[];
     for (var i = 0; i < $scope.categories.length; i++) {
-      if ($scope.categories[i].isSelected) {
+      if ($scope.categories[i].is_selected) {
         $scope.subject.categories.push($scope.categories[i]._id);
       }
     }
@@ -285,10 +287,10 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
 appControllers.controller('filterCtrl', function ($scope,$state, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,SubjectService,ConfigurationService) {
 
   $scope.saveFilter = function () {
-debugger
-    angular.forEach($scope.myFilter.categories, function (value, key) {
-      if (!value) {
-        delete $scope.myFilter.categories[key];
+    $scope.myFilter.categories=[];
+    angular.forEach($scope.categories, function (value, key) {
+      if (value.is_selected) {
+        $scope.myFilter.categories.push(value._id)
       }
     });
     ConfigurationService.SetMyFilter( $scope.myFilter);
@@ -303,6 +305,12 @@ debugger
     SubjectService.GetCategories()
       .then(function (categories) {
         $scope.categories = categories;
+        for(var i=0;i<$scope.categories.length;i++){
+          if($scope.myFilter.categories.indexOf($scope.categories[i]._id)!==-1)
+          {
+            $scope.categories[i].is_selected=true;
+          }
+        }
       }, function (err) {
       });
 
@@ -311,7 +319,7 @@ debugger
       $scope.myFilter = {
         nearMe: false,
         gender: 'both',
-        categories: {}
+        categories: []
       }
       ConfigurationService.SetMyFilter($scope.myFilter);
     }

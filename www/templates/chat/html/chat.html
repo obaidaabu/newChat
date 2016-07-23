@@ -50,14 +50,14 @@
 
     <section class="chats">
 
-    <span ng-repeat="message in messages">
-      <span>
-        <div ng-class='getBubbleClass(message.sender)'>
-          <p ng-bind="message.body"></p>
-        </div>
-        <div class="clear"></div>
+      <span ng-repeat="message in messages">
+        <span>
+          <div ng-class='getBubbleClass(message.sender)'>
+            <p ng-bind="message.body"></p>
+          </div>
+          <div class="clear"></div>
+        </span>
       </span>
-    </span>
 
     </section>
 

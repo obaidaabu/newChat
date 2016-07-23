@@ -1,4 +1,4 @@
-appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService, NotificationService){
+appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService, NotificationService){
   var allmessages = [];
   var userDetails = ConfigurationService.UserDetails();
   var userName = userDetails.first_name + " " + userDetails.last_name;
@@ -15,8 +15,9 @@ appServices.factory('ChatService', function($q, $rootScope, $ionicScrollDelegate
   var hanleOtherMessageRead;
 
   var scrollBottom = function(){
-    $ionicScrollDelegate.resize();
-    $ionicScrollDelegate.scrollBottom(true);
+    $timeout(function(){
+      $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
+    },0)
   };
 
   return {

@@ -11,10 +11,14 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
   $scope.messages = ChatService.getMessages();
 
   $timeout(function(){
-    debugger
     $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
-  },100)
+  },0)
 
+  window.addEventListener('native.keyboardshow', function(){
+    $timeout(function(){
+      $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
+    },0)
+  });
 
   $rootScope.$on('sendChatEvent', function(event, mass) {
     $scope.messages = ChatService.getMessages();

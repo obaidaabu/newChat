@@ -206,10 +206,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     });
     $ionicPlatform.ready(function () {
-      ionic.Platform.isFullScreen = true;
+      //ionic.Platform.isFullScreen = true;
 
       if (window.StatusBar) {
         StatusBar.styleDefault();
+      }
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
       }
       //var messageDetails = {
       //  conversationId: "575f27a54c5c031100d2d9ff-578fc2e1dc2c8b1100078962",

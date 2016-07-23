@@ -2030,5 +2030,4 @@ p.notification {
   overflow-y: auto; }
 
 .failed::-webkit-input-placeholder {
-  color: red;
-}
+  color: red; }

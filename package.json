@@ -35,7 +35,8 @@
     "onesignal-cordova-plugin",
     "cordova-plugin-geolocation",
     "cordova-plugin-whitelist",
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [
     "ios",

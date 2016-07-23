@@ -74,6 +74,7 @@ $scope.goToFilter=function(){
 })
 appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectService, $stateParams, $filter, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,ConfigurationService) {
   $scope.isExpanded=true;
+  $scope.failed = false;
   // initialForm is the first activity in the controller.
   // It will initial all variable data and let the function works when page load.
   $scope.subject = {};
@@ -107,6 +108,12 @@ appControllers.controller('addSubjectCtrl', function ($scope, $state, SubjectSer
   };// End initialForm.
 
   $scope.createSubject = function () {
+    if($scope.subject.title.length <= 0 || $scope.subject.description.length <= 0){
+      $scope.failed = true;
+      return;
+    }
+
+
     $scope.subject.categories=[];
     for (var i = 0; i < $scope.categories.length; i++) {
       if ($scope.categories[i].is_selected) {

@@ -2028,3 +2028,7 @@ p.notification {
 .overflow-scroll .scroll {
   overflow-x: hidden;
   overflow-y: auto; }
+
+.failed::-webkit-input-placeholder {
+  color: red;
+}

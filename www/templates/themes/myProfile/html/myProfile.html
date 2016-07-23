@@ -34,7 +34,7 @@
   <!--expense content section-->
   <ion-content id="expense-dashboard-content">
     <!--Below code it will disable animation to better performance-->
-    <div ng-if="!isAnimated" class="list-expense-menu">
+    <div ng-if="false" class="list-expense-menu">
       <div class="list-expense-menu-item" ng-repeat="subject in subjects"  ng-click="doSomeThing()">
         <div class="row">
           <div class="col-10">
@@ -46,7 +46,7 @@
             <p class="detail">{{subject.description}}</p>
           </div>
           <div class="col-20">
-            <i ng-show="displayDelete"  ng-click="deleteSubject(subject)" class="icon ion-android-cancel muted"></i>
+            <i  ng-click="deleteSubject(subject)" class="icon ion-android-cancel muted"></i>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
     </div>
 
     <!--Below code it will show animation when selecting row.-->
-    <md-list ng-if="isAnimated">
+    <md-list ng-if="true">
       <div ng-repeat="subject in subjects">
         <md-list-item class="row" ng-click="doSomeThing()">
           <div class="col-20 icon">

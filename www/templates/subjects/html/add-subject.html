@@ -18,9 +18,9 @@
             </md-toolbar>
             <div id="note-detail-content" class="subject-detail">
                 <md-input-container md-no-float>
-                    <input required name="noteTitle" placeholder="Subject Title *" ng-model="subject.title">
+                    <input ng-class="{'failed': failed}" required name="noteTitle" placeholder="Subject Title *" ng-model="subject.title">
                 </md-input-container>
-                <textarea rows="3" ng-model="subject.description" maxlength="250"
+                <textarea ng-class="{'failed': failed}" required rows="3" ng-model="subject.description" maxlength="250"
                           placeholder="Describe your subject here ...."></textarea>
                 <span>
                     {{(subject.description.length > 0 ? subject.description.length :0) | json}}/250

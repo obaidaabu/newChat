@@ -11,15 +11,13 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
   $scope.messages = ChatService.getMessages();
 
   $timeout(function(){
-    ChatService.scrollBottom();
+    debugger
+    $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
   },100)
 
 
   $rootScope.$on('sendChatEvent', function(event, mass) {
     $scope.messages = ChatService.getMessages();
-    $timeout(function(){
-      ChatService.scrollBottom();
-    },100)
     if(!$scope.$$phase) {
       $scope.$apply();
     }

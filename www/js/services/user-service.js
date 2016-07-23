@@ -1,5 +1,4 @@
-
-appServices.factory('UserService', function ($http, $log, $q ,$cordovaFacebook, ConfigurationService) {
+appServices.factory('UserService', function ($http, $log, $q, $cordovaFacebook, ConfigurationService) {
   return {
     CreateUser: function (user) {
       var deferred = $q.defer();
@@ -8,19 +7,35 @@ appServices.factory('UserService', function ($http, $log, $q ,$cordovaFacebook, 
         user
         , {
           headers: {
-            "Content-Type":"application/json"
+            "Content-Type": "application/json"
           }
         }).success(function (data) {
-          deferred.resolve(data);
-        }).error(function (msg, code) {
-          deferred.reject(msg);
-          //   $log.error(msg, code);
-        });
+        deferred.resolve(data);
+      }).error(function (msg, code) {
+        deferred.reject(msg);
+        //   $log.error(msg, code);
+      });
+      return deferred.promise;
+    },
+    LogOut: function () {
+      var deferred = $q.defer();
+
+      $http.get(ConfigurationService.ServerUrl() + '/api/users/logOut', {
+          headers: {
+            "Content-Type": "application/json",
+            "access-token": ConfigurationService.UserDetails().token
+          }
+        }).success(function (data) {
+        deferred.resolve(data);
+      }).error(function (msg, code) {
+        deferred.reject(msg);
+        //   $log.error(msg, code);
+      });
       return deferred.promise;
     },
     GetUser: function (userId) {
       var deferred = $q.defer();
-      $http.get(ConfigurationService.ServerUrl() + '/api/users/'+userId, {
+      $http.get(ConfigurationService.ServerUrl() + '/api/users/' + userId, {
         headers: {
           "access-token": ConfigurationService.UserDetails().token
         }
@@ -48,7 +63,7 @@ appServices.factory('UserService', function ($http, $log, $q ,$cordovaFacebook, 
     },
     FBlogin: function () {
       var deferred = $q.defer();
-      $cordovaFacebook.login(["public_profile", "email", "user_friends","user_birthday"]).then(
+      $cordovaFacebook.login(["public_profile", "email", "user_friends", "user_birthday"]).then(
         function success(result) {
           deferred.resolve(result);
         },
@@ -71,11 +86,11 @@ appServices.factory('UserService', function ($http, $log, $q ,$cordovaFacebook, 
           }
         }
       ).success(function (data) {
-          deferred.resolve(data);
-        }).error(function (msg, code) {
-          deferred.reject(msg);
-          //   $log.error(msg, code);
-        });
+        deferred.resolve(data);
+      }).error(function (msg, code) {
+        deferred.reject(msg);
+        //   $log.error(msg, code);
+      });
       return deferred.promise;
     },
   }

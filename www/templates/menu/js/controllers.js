@@ -1,11 +1,16 @@
 // Controller of menu toggle.
 // Learn more about Sidenav directive of angular material
 // https://material.angularjs.org/latest/#/demo/material.components.sidenav
-appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect,ConfigurationService, MessagesService) {
+appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect,ConfigurationService, MessagesService,UserService) {
     $scope.logOut = function(){
-      window.localStorage.clear();
-      ConfigurationService.LogOut();
-      $state.go('login');
+      UserService.LogOut()
+        .then(function () {
+          window.localStorage.clear();
+          ConfigurationService.LogOut();
+          $state.go('login');
+        }, function (err) {
+          $state.go('login');
+        });
     }
     $scope.checkUndreadMessage = function(){
 

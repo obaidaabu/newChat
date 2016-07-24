@@ -2827,8 +2827,8 @@ md-sidenav {
   right :-5% !important;
 }
 .user-photo{
-  width: 68px!important;
-  height: 68px !important;
+  min-width: 68px !important;
+  min-height: 68px !important;
   margin-top: 0px !important;
   margin-bottom: 0px !important;
   margin-left: -16px;

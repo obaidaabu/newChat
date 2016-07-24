@@ -2025,9 +2025,5 @@ p.notification {
   color: #c73636;
   z-index: 1; }
 
-.overflow-scroll .scroll {
-  overflow-x: hidden;
-  overflow-y: auto; }
-
 .failed::-webkit-input-placeholder {
   color: red; }

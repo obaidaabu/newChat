@@ -15,9 +15,11 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
   var hanleOtherMessageRead;
 
   var scrollBottom = function(){
-    $timeout(function(){
-      $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
-    },0)
+    //$timeout(function(){
+    //  $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
+    //},0)
+    $ionicScrollDelegate.scrollBottom(true);
+    $ionicScrollDelegate.resize();
   };
 
   return {
@@ -62,7 +64,7 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       });
     },
     sendMessage: function(msg, chatDetails){
-      scrollBottom();
+
       var myRef, otherRef;
       var isFirstMessage = false;
       if(!allmessages || allmessages.length == 0){

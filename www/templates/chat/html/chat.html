@@ -50,10 +50,15 @@
 
     <section class="chats">
 
-      <span ng-repeat="message in messages">
+      <span ng-repeat="(key, message) in messages">
         <span>
+          <div class="chat-date-span" ng-if="message.date_string != messages[$index - 1].date_string">
+            <span ng-if="message.date_string == dateString">today</span>
+            <span ng-if="message.date_string != dateString">{{message.date_string}}</span>
+          </div>
           <div ng-class='getBubbleClass(message.sender)'>
-            <p ng-bind="message.body"></p>
+            <p>{{message.body}} <span class="chat-time-span">{{message.create_date | amDateFormat:'h:mm a'}}</span></p>
+
           </div>
           <div class="clear"></div>
         </span>

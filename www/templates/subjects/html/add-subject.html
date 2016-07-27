@@ -32,7 +32,7 @@
               <div class="row price-detail">
                 <div class="col-100">
                   <md-checkbox aria-label="Checkbox" ng-model="category.is_selected" ng-repeat="category in categories">
-                    {{category.name}}
+                  <img ng-src="{{category.image_url}}">  {{category.name}}
                   </md-checkbox>
                 </div>
               </div>

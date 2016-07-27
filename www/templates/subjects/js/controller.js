@@ -2,6 +2,9 @@ appControllers.controller('subjectsCtrl', function ($scope, $ionicPlatform, $roo
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = false;
   $scope.subjects = [];
+  SubjectService.GetCategories()
+    .then(function (categories) {}, function (err) {
+    });
   $ionicPlatform.ready(function () {
     if (window.cordova && typeof window.plugins.OneSignal != 'undefined' && !ConfigurationService.Notification_token()) {
       $timeout(function () {

@@ -1,6 +1,8 @@
 // Controller of expense dashboard page.
 appControllers.controller('myProfileCtrl', function ($rootScope, $scope,$state,$stateParams,EntityService,SubjectService,ConfigurationService) {
-
+  SubjectService.GetCategories()
+    .then(function (categories) {}, function (err) {
+    });
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = false;
   $scope.isAnimated =  $stateParams.isAnimated;

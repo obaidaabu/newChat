@@ -4,6 +4,8 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
   $scope.chatDetails = EntityService.getMessageDetails();
   $scope.conversationId = $scope.chatDetails.conversationId;
   $scope.messages = [];
+  var createrId =  $scope.conversationId.split("-")[0];
+
 
 
   $scope.userDetails = ConfigurationService.UserDetails();
@@ -27,6 +29,9 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
       $scope.$apply();
     }
   });
+  $scope.blockUser=function () {
+    ChatService.blockUser($scope.chatDetails);
+  }
   $scope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams, options){
       conversationUserRef = new Firebase('https://chatoi.firebaseio.com/conversationOnline/' + $scope.userDetails._id);
@@ -45,7 +50,6 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     return classname;
   };
   $scope.goToUserProfile = function () {
-    var createrId =  $scope.conversationId.split("-")[0];
     $state.go('app.userProfile',{userId:createrId })
 
   }

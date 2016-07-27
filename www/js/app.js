@@ -417,6 +417,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             controller: 'filterCtrl'
           }
         }
+      }).state('app.blockedUsers', {
+        url: "/blockedUsers",
+      cache: false,
+        params: {
+          noteDetail: null,
+          actionDelete: false
+        },
+        views: {
+          'menuContent': {
+            templateUrl: "templates/blockedUsers/html/blockedUsers.html",
+            controller: 'blockedUsersCtrl'
+          }
+        }
       })
       .state('app.chat', {
         url: "/chat",

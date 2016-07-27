@@ -63,6 +63,15 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
 
       });
     },
+    blockUser:function (chatDetails) {
+      createrId = conversaionId.split("-")[0];
+      var blockedUserRef=new Firebase("https://chatoi.firebaseio.com/chats/" + userDetails._id+"/blocked/"+createrId);
+      var blockedUser = blockedUserRef.set({
+        userName: chatDetails.userName,
+        fbPhotoUrl: chatDetails.fbPhotoUrl,
+        userId:createrId
+      });
+    },
     sendMessage: function(msg, chatDetails){
 
       var myRef, otherRef;

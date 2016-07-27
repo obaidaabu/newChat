@@ -31,6 +31,9 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     }
   });
   $rootScope.$on('otherUserBlock', function(event, mass) {
+    if(mass){
+      $scope.sendInputPlaceHolder = "this user is blocked"
+    }
     $scope.disableSend = mass;
 
   });

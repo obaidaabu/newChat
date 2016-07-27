@@ -1,4 +1,4 @@
-appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScrollDelegate, $firebaseObject, ConfigurationService, NotificationService){
+appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScrollDelegate, $firebaseObject, $firebaseArray, ConfigurationService, NotificationService){
   var allmessages = [];
   var userDetails = ConfigurationService.UserDetails();
   var userName = userDetails.first_name + " " + userDetails.last_name;
@@ -55,10 +55,15 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       });
 
       var firebaseRef = new Firebase('https://chatoi.firebaseio.com/chats/' + userDetails._id + '/' + conversaionId);
-      firebaseRef.on('value', function(dataSnapshot) {
-        //allmessages.push(dataSnapshot.val());
-        allmessages = dataSnapshot.val().messages;
+      var firebaseRef2 = new Firebase('https://chatoi.firebaseio.com/chats/' + userDetails._id + '/' + conversaionId +"/messages");
+      var a = $firebaseArray(firebaseRef2);
+      a.$loaded(function(h){
+        allmessages = h;
         $rootScope.$broadcast('sendChatEvent', 'sendChatEvent');
+      })
+      firebaseRef.on('value', function(dataSnapshot) {
+        //allmessages = dataSnapshot.val().messages;
+        //$rootScope.$broadcast('sendChatEvent', 'sendChatEvent');
         scrollBottom();
 
       });
@@ -99,9 +104,12 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       myRef = new Firebase(myUrl + "/messages");
       var newMessageOtherUrl = otherRef.push();
       var newMessageRef2 = myRef.push();
+      var date = new Date();
       var msgTosend = {
         body: msg,
-        sender: userDetails._id
+        sender: userDetails._id,
+        create_date: date.toJSON(),
+        date_string: date.toLocaleDateString()
       }
       newMessageOtherUrl.set(msgTosend);
       newMessageRef2.set(msgTosend);

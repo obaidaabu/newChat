@@ -2893,7 +2893,7 @@ p.notification{
   right: -56px;
   width: 26px;
   height: 20px;
-  background: white;
+  background: #f6f6f6;
   border-bottom-left-radius: 10px;
   -webkit-transform: translate(-30px, -2px);
 }
@@ -3071,4 +3071,23 @@ p.notification{
 
 .failed::-webkit-input-placeholder {
   color: red;
+}
+
+.chat-time-span{
+  position: relative;
+  top: 10px;
+  font-size: 10px;
+}
+
+.chat-date-span{
+  margin: auto;
+  margin-bottom: 10px;
+  position: relative;
+  padding: 5px 20px;
+  background: #E5E5EA;
+  border-radius: 25px;
+  color: #000;
+  text-align: center;
+  width: 133px;
+  font-size: 12px;
 }

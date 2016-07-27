@@ -1,4 +1,6 @@
 appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDelegate, $rootScope, $state, ConfigurationService, ChatService, UserService, EntityService) {
+  var date = new Date();
+  $scope.dateString = date.toLocaleDateString();
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = true;
   $scope.chatDetails = EntityService.getMessageDetails();
@@ -13,18 +15,17 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
   $scope.messages = ChatService.getMessages();
 
   $timeout(function(){
-    //$('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
     ChatService.scrollBottom();
   },0)
 
   window.addEventListener('native.keyboardshow', function(){
-    $timeout(function(){
-      $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
-    },0)
+    ChatService.scrollBottom();
   });
 
   $rootScope.$on('sendChatEvent', function(event, mass) {
     $scope.messages = ChatService.getMessages();
+    date = new Date();
+    $scope.dateString = date.toLocaleDateString();
     if(!$scope.$$phase) {
       $scope.$apply();
     }
@@ -55,6 +56,8 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
   }
 
   $scope.sendMessage = function (msg) {
+    date = new Date();
+    $scope.dateString = date.toLocaleDateString();
     ChatService.sendMessage(msg, $scope.chatDetails);
 
     $scope.data.message = "";

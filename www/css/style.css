@@ -2044,3 +2044,8 @@ p.notification {
   text-align: center;
   width: 133px;
   font-size: 12px; }
+
+md-checkbox .md-label img {
+  height: 15px;
+  width: 15px;
+  margin-left: 10px; }

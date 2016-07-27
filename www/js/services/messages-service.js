@@ -42,17 +42,28 @@ appServices.factory('MessagesService', function($rootScope, $ionicScrollDelegate
           }
           var userRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
           userRef.on("value", function (userSnapshot) {
-
             var online = true;
             if (userSnapshot.val() == 'offline') {
               online = false;
 
             }
+            var blockedUrl = "https://chatoi.firebaseio.com/chats/" + createrId + "/blocked/" + userDetails._id;
+            var blockedRef = new Firebase(blockedUrl);
+            var blockUser = $firebaseObject(blockedRef);
+            blockUser.$loaded(function(value){
+              if(value.userId){
+                online = false;
+              }
+              var indexx = common.indexOfConv(messages, conversationId);
 
-            var indexx = common.indexOfConv(messages, conversationId);
+              messages[indexx].online = online
+              $rootScope.$broadcast('sendMessagesEvent', 'sendMessagesEvent');
+            })
 
-            messages[indexx].online = online
-            $rootScope.$broadcast('sendMessagesEvent', 'sendMessagesEvent');
+
+
+
+
 
           });
         }

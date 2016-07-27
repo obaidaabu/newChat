@@ -13,7 +13,7 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
   var conversationOterUserRef;
   var hanleMyMessageRead;
   var hanleOtherMessageRead;
-
+  var isUserBlocked = false;
   var scrollBottom = function(){
     //$timeout(function(){
     //  $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
@@ -43,6 +43,26 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
         conversationId: conversaion,
 
       });
+      var blockedUrl = "https://chatoi.firebaseio.com/chats/" + createrId + "/blocked/" + userDetails._id;
+      var blockedRef = new Firebase(blockedUrl);
+      var blockUser = $firebaseObject(blockedRef);
+      blockUser.$loaded(function(value){
+        if(value.userId){
+          isUserBlocked = true;
+        }
+      })
+
+      var myblockedUrl = "https://chatoi.firebaseio.com/chats/" + userDetails._id  + "/blocked/" + createrId;
+      var myblockedRef = new Firebase(myblockedUrl);
+      var myblockUser = $firebaseObject(myblockedRef);
+      myblockUser.$loaded(function(value){
+        if(value.userId){
+          $rootScope.$broadcast('otherUserBlock', true);
+        }else{
+          $rootScope.$broadcast('otherUserBlock', false);
+        }
+      })
+
 
       var isUserOnlineRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
       isUserOnlineRef.on("value", function (userSnapshot) {
@@ -87,17 +107,24 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       if(isFirstMessage){
         otherRef = new Firebase(otherUrl);
         myRef = new Firebase(myUrl);
+        var otherToSend = {
+          userName: userName,
+          subjectName: chatDetails.subjectName,
+          fbPhotoUrl: userDetails.fbPhotoUrl
+        }
+
         myRef.set({
           userName: chatDetails.userName,
           subjectName: chatDetails.subjectName,
           fbPhotoUrl: chatDetails.fbPhotoUrl,
           read: true
         });
-        otherRef.set({
-          userName: userName,
-          subjectName: chatDetails.subjectName,
-          fbPhotoUrl: userDetails.fbPhotoUrl
-        });
+
+        if(isUserBlocked){
+          otherToSend.read = true;
+        }
+
+        otherRef.set(otherToSend);
         isFirstMessage = false;
       }
       otherRef = new Firebase(otherUrl + "/messages");
@@ -111,40 +138,47 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
         create_date: date.toJSON(),
         date_string: date.toLocaleDateString()
       }
-      newMessageOtherUrl.set(msgTosend);
+
       newMessageRef2.set(msgTosend);
+      if(!isUserBlocked){
+        newMessageOtherUrl.set(msgTosend);
 
-      var didUserRead = $firebaseObject(conversationOterUserRef);
-      didUserRead.$loaded(function(value){
-        if(!value.conversationId){
-          hanleOtherMessageRead.set(false);
-        }else if (value.conversationId !== myConversaionId){
-          hanleOtherMessageRead.set(false);
-        }
-        else{
-          hanleOtherMessageRead.set(true);
-        }
-      })
-
-      var userRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
-      var isOtherUserOnline = $firebaseObject(userRef);
-      isOtherUserOnline.$loaded(function(value){
-        if(value && value.$value == 'offline'){
-          var message = {
-            user: createrId,
-            message: msg,
-            conversationId: myConversaionId,
-            userName: userName,
-            subjectName: chatDetails.subjectName,
-            fbPhotoUrl: userDetails.fbPhotoUrl
+        var didUserRead = $firebaseObject(conversationOterUserRef);
+        didUserRead.$loaded(function(value){
+          if(!value){
+            hanleOtherMessageRead.set(false);
+          }else if (value.conversationId !== myConversaionId){
+            hanleOtherMessageRead.set(false);
           }
-          NotificationService.SendMessage(message)
-            .then(function (message) {
+          else{
+            hanleOtherMessageRead.set(true);
+          }
+        })
+        var userRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
+        var isOtherUserOnline = $firebaseObject(userRef);
+        isOtherUserOnline.$loaded(function(value){
+          if(value && value.$value == 'offline'){
+            var message = {
+              user: createrId,
+              message: msg,
+              conversationId: myConversaionId,
+              userName: userName,
+              subjectName: chatDetails.subjectName,
+              fbPhotoUrl: userDetails.fbPhotoUrl
+            }
+            NotificationService.SendMessage(message)
+              .then(function (message) {
 
-            }, function (err) {
-            });
-        }
-      })
+              }, function (err) {
+              });
+          }
+        })
+      }
+
+
+
+
+
 
 
 

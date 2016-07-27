@@ -8,7 +8,7 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
   $scope.messages = [];
   var createrId =  $scope.conversationId.split("-")[0];
 
-
+  $scope.sendInputPlaceHolder = "Message"
 
   $scope.userDetails = ConfigurationService.UserDetails();
   ChatService.setMessages($scope.conversationId);
@@ -29,6 +29,10 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     if(!$scope.$$phase) {
       $scope.$apply();
     }
+  });
+  $rootScope.$on('otherUserBlock', function(event, mass) {
+    $scope.disableSend = mass;
+
   });
   $scope.blockUser=function () {
     ChatService.blockUser($scope.chatDetails);
@@ -58,22 +62,35 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
   $scope.sendMessage = function (msg) {
     date = new Date();
     $scope.dateString = date.toLocaleDateString();
+
     ChatService.sendMessage(msg, $scope.chatDetails);
 
     $scope.data.message = "";
   }
 })
-appControllers.controller('OnlineUserCtrl', function ($scope, EntityService) {
+appControllers.controller('OnlineUserCtrl', function ($scope,$firebaseObject, ConfigurationService, EntityService) {
+  var userDetails = ConfigurationService.UserDetails();
   var chatDetails = EntityService.getMessageDetails();
   var conversationId = chatDetails.conversationId;
   var createrId = conversationId.split("-")[0];
   var isUserOnlineRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);
-  isUserOnlineRef.on("value", function (userSnapshot) {
-    if (userSnapshot.val() && userSnapshot.val() == 'online') {
-      $scope.isUserOnline = true;
-    }
-    else{
+  var blockedUrl = "https://chatoi.firebaseio.com/chats/" + createrId + "/blocked/" + userDetails._id;
+  var blockedRef = new Firebase(blockedUrl);
+  var blockUser = $firebaseObject(blockedRef);
+  blockUser.$loaded(function(value){
+    if(value.userId){
       $scope.isUserOnline = false;
     }
-  });
+    else{
+      isUserOnlineRef.on("value", function (userSnapshot) {
+        if (userSnapshot.val() && userSnapshot.val() == 'online') {
+          $scope.isUserOnline = true;
+        }
+        else{
+          $scope.isUserOnline = false;
+        }
+      });
+    }
+  })
+
 })

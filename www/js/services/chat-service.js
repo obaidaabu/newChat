@@ -14,6 +14,7 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
   var hanleMyMessageRead;
   var hanleOtherMessageRead;
   var isUserBlocked = false;
+  var privecy;
   var scrollBottom = function(){
     //$timeout(function(){
     //  $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
@@ -79,11 +80,35 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       var a = $firebaseArray(firebaseRef2);
       a.$loaded(function(h){
         allmessages = h;
+
         $rootScope.$broadcast('sendChatEvent', 'sendChatEvent');
       })
+
       firebaseRef.on('value', function(dataSnapshot) {
-        //allmessages = dataSnapshot.val().messages;
+        privecy = false;
+        var messages = [];
+        messages =  dataSnapshot.val().messages;
+
+        var counter = 0;
+        var myMessages = 0;
+        angular.forEach(messages, function(value, key) {
+          if(counter == 3 && counter == myMessages){
+            privecy = true;
+          }
+          if(counter == 4 && messages[key].sender != userDetails._id){
+            privecy = false;
+          }
+          if(messages[key].sender == userDetails._id){
+            myMessages ++;
+          }
+          counter++;
+
+        });
+
+
+
         //$rootScope.$broadcast('sendChatEvent', 'sendChatEvent');
+
         scrollBottom();
 
       });
@@ -98,6 +123,10 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       });
     },
     sendMessage: function(msg, chatDetails){
+      if(privecy){
+        ConfigurationService.showAlert();
+        return;
+      }
 
       var myRef, otherRef;
       var isFirstMessage = false;

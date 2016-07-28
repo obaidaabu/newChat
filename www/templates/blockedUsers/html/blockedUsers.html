@@ -4,7 +4,7 @@
     <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
   </ion-nav-buttons>
 
-  <ion-content  id="menu-dashboard-content" >
+  <ion-content ng-class="{expanded: isExpanded}" id="menu-dashboard-content" >
     <div class="menu-dashboard-footer">
       <md-whiteframe class="md-whiteframe-z1 subject-element" layout  ng-repeat="user in blockedUsers"  >
         <div class="row sub-row" ng-click="showConfirm(user)">

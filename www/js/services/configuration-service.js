@@ -1,4 +1,4 @@
-appServices.factory('ConfigurationService', function () {
+appServices.factory('ConfigurationService', function ($ionicPopup) {
   return {
     ServerUrl: function () {
        return "https://chatad.herokuapp.com";
@@ -43,6 +43,16 @@ appServices.factory('ConfigurationService', function () {
         window.localStorage['notification_token'] = angular.toJson(notification_token);
         this.notification_token = notification_token;
       }
+    },
+    showAlert: function() {
+      var alertPopup = $ionicPopup.alert({
+        title: 'info',
+        template: 'wiat for the other user to answer you'
+      });
+
+      alertPopup.then(function(res) {
+        console.log('Thank you for not eating my delicious ice cream cone');
+      });
     },
     LogOut:function () {
       delete this.notification_token;

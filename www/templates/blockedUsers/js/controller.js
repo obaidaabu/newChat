@@ -1,4 +1,6 @@
-appControllers.controller('blockedUsersCtrl', function ($scope,$state,$ionicPopup, $stateParams, $filter,$firebaseArray, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,SubjectService,ConfigurationService,Firebase) {
+appControllers.controller('blockedUsersCtrl', function ($scope, $rootScope,$state,$ionicPopup, $stateParams, $filter,$firebaseArray, $mdBottomSheet, $mdDialog, $mdToast, $ionicHistory,SubjectService,ConfigurationService,Firebase) {
+  $scope.isExpanded = true;
+  $rootScope.isHeaderExpanded = true;
   $scope.showConfirm = function(blockedUser) {
   var confirmPopup = $ionicPopup.confirm({
     title: 'Unblock User',

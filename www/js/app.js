@@ -248,7 +248,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         window.plugins.OneSignal.enableNotificationsWhenActive(false);
       }
       //window.localStorage.clear();
-      var user=ConfigurationService.UserDetails();
+      var user = ConfigurationService.UserDetails();
       if (user) {
         UserService.CheckUser()
           .then(function (user) {

@@ -44,7 +44,17 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     debugger
     var confirmPopup = $ionicPopup.confirm({
       title: 'Block User',
-      template: 'Are you sure you want to block '+ $scope.chatDetails.userName+' ?'
+      template: 'Are you sure you want to block '+ $scope.chatDetails.userName+' ?',
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Block</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            return "sss";
+          }
+        }
+      ]
     });
     confirmPopup.then(function(res) {
       if(res) {
@@ -56,18 +66,32 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     });
 
   }
-  $scope.reason="";
-  $scope.is_toBlocked=true;
-  $scope.reportUser=function () {
 
-    var confirmPopup = $ionicPopup.confirm({
+  $scope.reportUser=function () {
+    $scope.data={is_toBlocked:true,reason:""};
+    var confirmPopup = $ionicPopup.show({
       title: 'Report User',
-      template: '<textarea cols="4" ng-model="reason" placeholder="Giv us more details"></textarea>   <md-checkbox aria-label="Checkbox" ng-model="is_toBlocked">Also block this user ? </md-checkbox>'
+      template: '<textarea cols="4" ng-model="data.reason" placeholder="Giv us more details"></textarea>   <md-checkbox aria-label="Checkbox" ng-model="data.is_toBlocked">Also block this user ? </md-checkbox>',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Report</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+              return {is_toBlocked:$scope.data.is_toBlocked,report:{user:$scope.chatDetails.conversationId.split('-')[1],reason:$scope.data.reason}};
+            }
+          }
+      ]
     });
     confirmPopup.then(function(res) {
       if(res) {
         debugger
-        ChatService.report({user:$scope.chatDetails.conversationId.split('-')[1],resaon:$scope.reason});
+        ChatService.ReportUser(res.report);
+        if(res.is_toBlocked)
+        {
+          ChatService.blockUser($scope.chatDetails);
+        }
         console.log('You are sure');
       } else {
         console.log('You are not sure');

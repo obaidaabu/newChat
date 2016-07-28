@@ -1,8 +1,8 @@
 appServices.factory('ConfigurationService', function () {
   return {
     ServerUrl: function () {
-       return "https://chatad.herokuapp.com";
-      //return "http://192.168.1.21:3000";
+       // return "https://chatad.herokuapp.com";
+      return "http://192.168.1.21:3000";
       //return "http://192.168.1.21:3000";
     },
     UserDetails: function () {

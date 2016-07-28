@@ -1,4 +1,4 @@
-appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDelegate, $rootScope, $state, ConfigurationService, ChatService, UserService, EntityService) {
+appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDelegate, $rootScope, $state,$ionicPopup, ConfigurationService, ChatService, UserService, EntityService) {
   var date = new Date();
   $scope.dateString = date.toLocaleDateString();
   $scope.isExpanded = true;
@@ -41,7 +41,40 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
 
   });
   $scope.blockUser=function () {
-    ChatService.blockUser($scope.chatDetails);
+    debugger
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Block User',
+      template: 'Are you sure you want to block '+ $scope.chatDetails.userName+' ?'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        ChatService.blockUser($scope.chatDetails);
+        console.log('You are sure');
+      } else {
+        console.log('You are not sure');
+      }
+    });
+
+  }
+  $scope.reason="";
+  $scope.is_toBlocked=true;
+  $scope.reportUser=function () {
+
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Report User',
+      template: '<textarea cols="4" ng-model="reason" placeholder="Giv us more details"></textarea>   <md-checkbox aria-label="Checkbox" ng-model="is_toBlocked">Also block this user ? </md-checkbox>'
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        debugger
+        ChatService.report({user:$scope.chatDetails.conversationId.split('-')[1],resaon:$scope.reason});
+        console.log('You are sure');
+      } else {
+        console.log('You are not sure');
+      }
+    });
+
+    //ChatService.blockUser($scope.chatDetails);
   }
   $scope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams, options){

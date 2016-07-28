@@ -1,4 +1,4 @@
-appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScrollDelegate, $firebaseObject, $firebaseArray, ConfigurationService, NotificationService){
+appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScrollDelegate, $firebaseObject, $firebaseArray, ConfigurationService, NotificationService,$http){
   var allmessages = [];
   var userDetails = ConfigurationService.UserDetails();
   var userName = userDetails.first_name + " " + userDetails.last_name;
@@ -203,14 +203,20 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
           }
         })
       }
-
-
-
-
-
-
-
-
+    },
+    ReportUser: function (report) {
+      var deferred = $q.defer();
+      $http.post(ConfigurationService.ServerUrl() + '/api/users/report',report, {
+        headers: {
+          "access-token": ConfigurationService.UserDetails().token
+        }
+      }).success(function (data) {
+        deferred.resolve(data);
+      }).error(function (msg, code) {
+        deferred.reject(msg);
+        //   $log.error(msg, code);
+      });
+      return deferred.promise;
     },
     scrollBottom: scrollBottom
   }

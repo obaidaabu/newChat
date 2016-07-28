@@ -1,4 +1,4 @@
-appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDelegate, $rootScope, $state, ConfigurationService, ChatService, UserService, EntityService) {
+appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDelegate, $rootScope, $state,$ionicPopup, ConfigurationService, ChatService, UserService, EntityService) {
   var date = new Date();
   $scope.dateString = date.toLocaleDateString();
   $scope.isExpanded = true;
@@ -41,7 +41,64 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
 
   });
   $scope.blockUser=function () {
-    ChatService.blockUser($scope.chatDetails);
+    debugger
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'Block User',
+      template: 'Are you sure you want to block '+ $scope.chatDetails.userName+' ?',
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Block</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            return "sss";
+          }
+        }
+      ]
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        ChatService.blockUser($scope.chatDetails);
+        console.log('You are sure');
+      } else {
+        console.log('You are not sure');
+      }
+    });
+
+  }
+
+  $scope.reportUser=function () {
+    $scope.data={is_toBlocked:true,reason:""};
+    var confirmPopup = $ionicPopup.show({
+      title: 'Report User',
+      template: '<textarea cols="4" ng-model="data.reason" placeholder="Giv us more details"></textarea>   <md-checkbox aria-label="Checkbox" ng-model="data.is_toBlocked">Also block this user ? </md-checkbox>',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Report</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+              return {is_toBlocked:$scope.data.is_toBlocked,report:{user:$scope.chatDetails.conversationId.split('-')[1],reason:$scope.data.reason}};
+            }
+          }
+      ]
+    });
+    confirmPopup.then(function(res) {
+      if(res) {
+        debugger
+        ChatService.ReportUser(res.report);
+        if(res.is_toBlocked)
+        {
+          ChatService.blockUser($scope.chatDetails);
+        }
+        console.log('You are sure');
+      } else {
+        console.log('You are not sure');
+      }
+    });
+
+    //ChatService.blockUser($scope.chatDetails);
   }
   $scope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams, options){

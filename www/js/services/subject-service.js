@@ -97,6 +97,22 @@ appServices.factory('SubjectService', function ($http, $log, $q, ConfigurationSe
 
       return deferred.promise;
     },
+    Interested: function (subjectId) {
+      var deferred = $q.defer();
+        $http.post(ConfigurationService.ServerUrl() + '/api/subjects/interested', {subjectId:subjectId}, {
+          headers: {
+            "access-token": ConfigurationService.UserDetails().token
+          }
+        }).success(function (data) {
+          deferred.resolve(data);
+        }).error(function (msg, code) {
+          deferred.reject(msg);
+          //   $log.error(msg, code);
+        });
+
+
+      return deferred.promise;
+    },
     CreateSubject: function (subject) {
       var deferred = $q.defer();
       var posOptions = {timeout: 10000, enableHighAccuracy: false};

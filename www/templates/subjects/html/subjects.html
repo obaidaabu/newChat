@@ -34,7 +34,10 @@
           <div ng-click="goToChat(subject)" class="md-list-item-text subject-md-list-item-text">
           <h3 class="sub-title subject-title">{{subject.user.first_name}}, {{subject.title}}</h3>
 
-          <p class="subject-desc">{{subject.description}}</p>
+          <p class="subject-desc">{{(subject.interested.length>0)? subject.description+' , interested '+subject.interested.length:subject.description}}
+            <!--<p  ng-show="subject.interested.length>0">interested {{subject.interested.length}}</p>-->
+          </p>
+
             <div class="card-footer text-right">
               <div class="pull-left">
                 <i class="icon ion-clock"></i> <span am-time-ago="subject.create_date"></span>

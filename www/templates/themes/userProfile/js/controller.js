@@ -1,8 +1,9 @@
 
-appControllers.controller('userProfileCtrl', function ($rootScope, $scope,$state,$stateParams,EntityService,SubjectService) {
+appControllers.controller('userProfileCtrl', function ($rootScope, $scope,$state,$stateParams,EntityService,SubjectService,UserService) {
   $scope.isExpanded = true;
   $rootScope.isHeaderExpanded = false;
-  $scope.first_name=$state.params.first_name;
+  $scope.userProfile = UserService.GetUserProfile();
+  $scope.first_name = $scope.userProfile.first_name;
 
   $scope.a=function(){
     $state.go('app.subjects');
@@ -10,10 +11,9 @@ appControllers.controller('userProfileCtrl', function ($rootScope, $scope,$state
   $scope.isAnimated =  $stateParams.isAnimated;
   //$scope.userProfile = angular.fromJson(window.localStorage['user']);
   $scope.subjects = [];
-  SubjectService.GetMySubjects($state.params.userId)
+  SubjectService.GetMySubjects($scope.userProfile.userId)
     .then(function (subjects) {
       $scope.subjects = subjects;
-      $scope.userProfile=subjects[0].user;
     }, function (err) {
     });
 

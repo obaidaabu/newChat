@@ -20,9 +20,8 @@ appControllers.controller('messagesCtrl', function ($scope, $rootScope, $state, 
   }
 
   $scope.goToUserProfile = function (message) {
-    var createrId = message.conversationId.split("-")[0];
-
-    $state.go('app.userProfile',{userId:createrId ,first_name: message.userName})
+    UserService.SetUserProfile(message);
+    $state.go('app.userProfile')
 
   }
 });

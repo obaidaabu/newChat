@@ -40,8 +40,7 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     $scope.disableSend = mass;
 
   });
-  $scope.blockUser=function () {
-    debugger
+  $scope.blockUser = function () {
     var confirmPopup = $ionicPopup.confirm({
       title: 'Block User',
       template: 'Are you sure you want to block '+ $scope.chatDetails.userName+' ?',
@@ -86,7 +85,6 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     });
     confirmPopup.then(function(res) {
       if(res) {
-        debugger
         ChatService.ReportUser(res.report);
         if(res.is_toBlocked)
         {
@@ -118,6 +116,7 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
     return classname;
   };
   $scope.goToUserProfile = function () {
+    UserService.SetUserProfile($scope.chatDetails);
     $state.go('app.userProfile',{userId:createrId })
 
   }

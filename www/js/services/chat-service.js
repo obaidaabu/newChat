@@ -46,23 +46,29 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       });
       var blockedUrl = "https://chatoi.firebaseio.com/chats/" + createrId + "/blocked/" + userDetails._id;
       var blockedRef = new Firebase(blockedUrl);
-      var blockUser = $firebaseObject(blockedRef);
-      blockUser.$loaded(function(value){
-        if(value.userId){
+
+      blockedRef.on("value", function (userSnapshot) {
+        debugger
+        if (userSnapshot.val()) {
           isUserBlocked = true;
+        }else{
+          isUserBlocked = false;
         }
-      })
+      });
+
 
       var myblockedUrl = "https://chatoi.firebaseio.com/chats/" + userDetails._id  + "/blocked/" + createrId;
       var myblockedRef = new Firebase(myblockedUrl);
-      var myblockUser = $firebaseObject(myblockedRef);
-      myblockUser.$loaded(function(value){
-        if(value.userId){
+      myblockedRef.on("value", function (userSnapshot) {
+        debugger
+        if (userSnapshot.val()) {
           $rootScope.$broadcast('otherUserBlock', true);
-        }else{
+        }
+        else{
           $rootScope.$broadcast('otherUserBlock', false);
         }
-      })
+      });
+
 
 
       var isUserOnlineRef = new Firebase('https://chatoi.firebaseio.com/presence/' + createrId);

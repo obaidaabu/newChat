@@ -1,5 +1,7 @@
 appServices.factory('UserService', function ($http, $log, $q, $cordovaFacebook, ConfigurationService) {
+  var userProfile = {};
   return {
+
     CreateUser: function (user) {
       var deferred = $q.defer();
 
@@ -93,5 +95,15 @@ appServices.factory('UserService', function ($http, $log, $q, $cordovaFacebook, 
       });
       return deferred.promise;
     },
+    SetUserProfile: function(message){
+      var createrId = message.conversationId.split("-")[0];
+      userProfile.userId = createrId;
+      userProfile.first_name = message.userName;
+     
+      userProfile.fbPhotoUrl = message.fbPhotoUrl;
+    },
+    GetUserProfile: function(){
+      return userProfile;
+    }
   }
 });

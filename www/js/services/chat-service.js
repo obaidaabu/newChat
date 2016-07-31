@@ -48,7 +48,6 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       var blockedRef = new Firebase(blockedUrl);
 
       blockedRef.on("value", function (userSnapshot) {
-        debugger
         if (userSnapshot.val()) {
           isUserBlocked = true;
         }else{
@@ -60,7 +59,6 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
       var myblockedUrl = "https://chatoi.firebaseio.com/chats/" + userDetails._id  + "/blocked/" + createrId;
       var myblockedRef = new Firebase(myblockedUrl);
       myblockedRef.on("value", function (userSnapshot) {
-        debugger
         if (userSnapshot.val()) {
           $rootScope.$broadcast('otherUserBlock', true);
         }

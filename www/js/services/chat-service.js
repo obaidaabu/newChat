@@ -1,4 +1,4 @@
-appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScrollDelegate, $firebaseObject, $firebaseArray, ConfigurationService, NotificationService,$http){
+appServices.factory('ChatService', function($q, $timeout,SubjectService, $rootScope, $ionicScrollDelegate, $firebaseObject, $firebaseArray, ConfigurationService, NotificationService,$http){
   var allmessages = [];
   var userDetails = ConfigurationService.UserDetails();
   var userName = userDetails.first_name + " " + userDetails.last_name;
@@ -128,12 +128,18 @@ appServices.factory('ChatService', function($q, $timeout, $rootScope, $ionicScro
         return;
       }
 
+
       var myRef, otherRef;
       var isFirstMessage = false;
+      myConversaionId = userDetails._id + '-' + subjectId;
+
       if(!allmessages || allmessages.length == 0){
         isFirstMessage = true;
       }
       if(isFirstMessage){
+        SubjectService.Interested(subjectId).then(function (result) {
+        }, function (err) {
+        });
         otherRef = new Firebase(otherUrl);
         myRef = new Firebase(myUrl);
         var otherToSend = {

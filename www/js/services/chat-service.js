@@ -19,8 +19,8 @@ appServices.factory('ChatService', function($q, $timeout,SubjectService, $rootSc
     //$timeout(function(){
     //  $('.chats').parent().scrollTop( $('.chats').parent()[0].scrollHeight);
     //},0)
-    $ionicScrollDelegate.scrollBottom(true);
-    $ionicScrollDelegate.resize();
+    $ionicScrollDelegate.scrollBottom(false);
+
   };
 
   return {

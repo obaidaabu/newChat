@@ -20,7 +20,7 @@ appControllers.controller('chatCtrl', function ($scope, $timeout,$ionicScrollDel
 
   window.addEventListener('native.keyboardshow', function(){
     $timeout(function(){
-      ChatService.scrollBottom();
+      $ionicScrollDelegate.scrollBottom(false);
     },300)
 
   });

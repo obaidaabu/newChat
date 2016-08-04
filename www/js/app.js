@@ -225,7 +225,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       //$timeout(function(){
       //  $state.go("app.chat");
       //},3000)
-
+      var isNotificationClicked = false;
       if(window.cordova && typeof window.plugins.OneSignal != 'undefined'){
         var notificationOpenedCallback = function (jsonData) {
 
@@ -235,10 +235,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             subjectName: jsonData.additionalData.subjectName,
             fbPhotoUrl: jsonData.additionalData.fbPhotoUrl
           }
+          isNotificationClicked = true;
           EntityService.setMessageDetails(messageDetails);
-          $timeout(function(){
-            $state.go("app.chat");
-          },3000)
+
 
 
         };
@@ -261,7 +260,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 if (error) {
                   console.log("Login Failed!", error);
                 } else {
-                  $state.go("app.subjects");
+                  if(isNotificationClicked)
+                    $state.go("app.chat");
+                  else
+                    $state.go("app.subjects");
                 }
               });
             }
